@@ -11,7 +11,7 @@
 * Parcial: 30/11. Único. 
 * TP: fecha **límite**. Semana del 7/12. Se toma la nota del TP como 2da nota.
 
-### Clase
+### Clase 1 - 17/08/2021
 
 Cada tarea tiene un contexto de ejecucion.
 
