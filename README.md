@@ -27,6 +27,13 @@ Ruby MRI: run single thread. Tiene GIL: global interpreter lock. Voluntariamente
   
 Ruby sobre jvm: bellísimo.
 
+### Clase 2 - 24/08/2021
+
+## Práctca con ruby
+
+* Ambiente: mirar site o mail (deberían haber enviado algo).
+* Comunicación: por el canal de discord.
+
 
 
 
