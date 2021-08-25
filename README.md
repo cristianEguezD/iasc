@@ -34,7 +34,9 @@ Ruby sobre jvm: bellísimo.
 * Ambiente: mirar site o mail (deberían haber enviado algo).
 * Comunicación: por el canal de discord.
 
+# "INSERTAR" cuadro (armarlo)
 
+Respuestas:
 
 
 
