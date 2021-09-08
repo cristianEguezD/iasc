@@ -73,3 +73,6 @@ En ruby tenemos los Fiber que son similares a las corrutinas.
 
 GUILD thread de SO que permite ejecutar hilos de usuario como hilos de SO y estos pueden ejecutarse en cada procesador.
 
+### Clase 4 - 7/09/2021
+
+Evento: contexto de ejecucion. Node los planifica.
