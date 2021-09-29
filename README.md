@@ -76,3 +76,41 @@ GUILD thread de SO que permite ejecutar hilos de usuario como hilos de SO y esto
 ### Clase 4 - 7/09/2021
 
 Evento: contexto de ejecucion. Node los planifica.
+
+### Clase 5 - 28/09/2021
+
+earlang - diseñado para ser distribuido y tolerante a fallos de manera nativa
+
+BEAM es la maquina virtual de Erlang.
+
+spawn crea un proceso (no es de SO, por lo tanto es muy barato) que hace lo que le pases como funcion. Retorna el pid. 
+
+Se puede hacer Process.alive?(pid) que nos dice si el proceso esta vivo o no.
+
+send <- directiva|privimita que permite que un proceso envie un mensaje a otro proceso (puede ser si mismo)
+
+recieve <- dice con pattern matching que sabe recibir o que entiende. Es bloqueante hasta que llega un mensaje.
+
+existe el concepto de mailbox..los procesos "miran" su mailbox. Funciona como una queue (orden papurri)
+
+el interprete es un proceso tambien (o sea, que tiene mailbox)
+
+#PID<0.120.0>
+
+0: local
+120: numero de proceso
+0: comunicaco con alguien de otra maquina
+
+spawn_link genera un proceso linkeado al padre, si el hijo muere y el padre no sabe que hacer tambien muere. Esto implica una relacion fuerte entre procesos, cuando uno no puede estar sin el otro.
+
+defmodule permite organizar funciones.
+
+OTP: Open Telecom Platform. OTP es una colección de middleware, bibliotecas y herramientas útiles escritas en el lenguaje de programación Erlang. Es una parte integral de la distribución de código abierto de Erlang.
+
+GenServer viene de OTP
+
+  handle_cast, es un fire and forget
+  handle_call
+
+
+
