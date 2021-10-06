@@ -112,5 +112,27 @@ GenServer viene de OTP
   handle_cast, es un fire and forget
   handle_call
 
+### Clase 5 - 06/10/2021
 
+proceso: conteto de ejecucion que se pueden ejecutar en la vm (EBM). 
 
+genserver: nos permite levantar un proceso y enviar mensajes async o sync.
+agent: objetivo: guardar un dato y devolverlo. 
+
+use Supervisor: supervisa procesos..y si se mueren los vuelve a inicializar. Podes decir cuando se revisa, como se reviva y con que estado.
+
+:observer.start <-esta piolita jaja
+
+el supervisor tiene estrategias para revivir a los hijos.
+
+one_for_one: si el hijo (supervisado) muere crea otro (y obviamente lo sigue supervisando xd)
+
+one_for_all: si muere 1 hijo..mato a todos los hijos y revivo a todos. Si uno muere el resto no tiene sentido que sigan existiendo.
+
+rest_for_one: si se muere un hijo, mata a todos los hijos que fueron creados despues del que murio, luego los inicializa/revive.
+
+supervisor:
+	max_restarts: default=3, si se pasa se muere
+	max_seconcs: default =5s, el marco de tiempo en el que rige max_rstarts.
+
+OTP 23 - bancan hilos
