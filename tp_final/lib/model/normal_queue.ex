@@ -1,13 +1,19 @@
 defmodule NormalQueue do
 	use GenServer
 
-	def start_link() do
+	def start_link(name) do
 		GenServer.start_link(__MODULE__)
 	end
 
+	"""
 	def init({consumers}) do
     {:ok, {consumers}}
   end
+	"""
+
+	def handle_cast({:processMessage, message}, {consumers}) do
+		{:noreply, {consumers}}
+	end
 
 	def handle_call(:healthCheck, _from, {consumers}) do
 		{:reply, :healthCheck, {consumers}}
@@ -19,10 +25,6 @@ defmodule NormalQueue do
 
 	def handle_call(:getConsumers, _from, {consumers}) do
 		{:reply, consumers, {consumers}}
-	end
-
-	def handle_cast({:processMessage, message}, {consumers}) do
-		{:noreply, {consumers}}
 	end
 
 end

@@ -12,8 +12,9 @@ defmodule QueueManager.Application do
       QueueManager.HordeRegistry,
       QueueManager.HordeSupervisor,
       QueueManager.NodeObserver.Supervisor,
-      { QueueManager.PongWorker.Starter,
-      [name: QueueManager.PongWorker, timeout: :timer.seconds(10)]}
+			{ NormalQueue, :saraza },
+      #{ QueueManager.PongWorker.Starter,
+      #[name: QueueManager.PongWorker, timeout: :timer.seconds(10)]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html for other strategies and supported options
