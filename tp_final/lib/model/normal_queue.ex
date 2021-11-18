@@ -1,21 +1,25 @@
-defmodule NormalQueue do
+defmodule QueueManager.NormalQueue do
 	use GenServer
 
-	def start_link(name) do
-		GenServer.start_link(__MODULE__)
+	def start_link(opts) do
+		name = Keyword.get(opts, :name, __MODULE__)
+		IO.puts(:stdio, name)
+		GenServer.start_link(__MODULE__, [], name: name)
 	end
 
-	"""
-	def init({consumers}) do
-    {:ok, {consumers}}
-  end
-	"""
+	def init(init_arg) do
+		{:ok, init_arg}
+	end
 
-	def handle_cast({:processMessage, message}, {consumers}) do
+	# def init() do
+  #   {:ok, {[]}}
+  # end
+
+	def handle_cast({:processMessage, _message}, {consumers}) do
 		{:noreply, {consumers}}
 	end
 
-	def handle_call(:healthCheck, _from, {consumers}) do
+	def handle_call(:healthCheck, _from, consumers) do
 		{:reply, :healthCheck, {consumers}}
 	end
 
@@ -28,6 +32,11 @@ defmodule NormalQueue do
 	end
 
 end
+
+"""
+pid = GenServer.whereis(QueueManager.NormalQueue)
+GenServer.call(pid,:healthCheck)
+"""
 
 """
 	iex
