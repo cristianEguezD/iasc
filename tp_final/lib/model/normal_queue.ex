@@ -30,7 +30,7 @@ defmodule QueueManager.NormalQueue do
 end
 
 """
-pid = GenServer.whereis(QueueManager.NormalQueue)
+pid = GenServer.whereis(:queue_1)
 GenServer.call(pid,:healthCheck)
 """
 

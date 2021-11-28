@@ -12,9 +12,7 @@ defmodule QueueManager.Application do
       QueueManager.HordeRegistry,
       QueueManager.HordeSupervisor,
       QueueManager.NodeObserver.Supervisor,
-			# { QueueManager.NormalQueue, :saraza },
-      # { QueueManager.NormalQueue.Starter,[name: :cola_1]},
-      { QueueManager.NormalQueue.Starter,[name: QueueManager.NormalQueue]}
+      { QueueManager.NormalQueue.Starter,[name: :queue_1]},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html for other strategies and supported options
