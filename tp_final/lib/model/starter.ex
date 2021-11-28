@@ -18,6 +18,12 @@ defmodule QueueManager.NormalQueue.Starter do
   end
 
   def start_link(opts) do
+    QueueManager.NormalQueue.Starter.start_queue(opts)
+
+    :ignore
+  end
+
+  def start_queue(opts) do
     name =
       opts
       |> Keyword.get(:name, NormalQueue)
