@@ -31,7 +31,8 @@ defmodule Consumer do
 
 	defp write_in_file(message_processed) do
 		time = :os.system_time(:nanosecond)
-		File.write("#{time}-#{Node.self()}.data", message_processed)
+		pid = "#{inspect self()}"
+		File.write("#{time}-#{Node.self()}-#{pid}.data", message_processed)
 	end
 
 end
