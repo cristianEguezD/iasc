@@ -33,10 +33,6 @@ defmodule QueueManager.NormalQueue do
     {:noreply, {consumers, newMessages}}
   end
 
-	def handle_call(:getPendingMessages, _from, {consumers, messages}) do
-		{:reply, messages, {consumers, messages}}
-	end
-
 	def handle_call(:getState, _from, state) do
 		{:reply, state, state}
 	end
@@ -47,10 +43,6 @@ defmodule QueueManager.NormalQueue do
 
 	def handle_call({:addConsumer, consumer}, _from, {consumers, messages}) do
 		{:reply, :ok, {consumers ++ [consumer], messages}}
-	end
-
-	def handle_call(:getConsumers, _from, {consumers, messages}) do
-		{:reply, consumers, {consumers, messages}}
 	end
 
 	"
