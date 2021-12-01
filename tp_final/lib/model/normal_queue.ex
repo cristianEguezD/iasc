@@ -1,6 +1,8 @@
 defmodule QueueManager.NormalQueue do
 	use GenServer
 
+	@default_timeout 10000
+
 	def start_link(opts) do
 		name = Keyword.get(opts, :name, __MODULE__)
 		IO.puts(:stdio, name)
@@ -15,21 +17,36 @@ defmodule QueueManager.NormalQueue do
 		Messages
 	"
 
-	def handle_cast({:processMessage, message}, {[ch | ct]}) do
+	def handle_cast({:processMessage, message}, {[ch | ct], messages}) do
 		GenServer.cast(ch, {:processMessage, message})
-		{:noreply, {[ct | ch]}}
+		"Agrego el mensaje al estado hasta que tenga confirmado que se haya consumido totalmente"
+		Process.send_after(self, {:timeout, message}, @default_timeout)
+		{:noreply, {[ct | ch], messages ++ [message]}}
+	end
+
+	def handle_info({:timeout, message}, {consumers, messages}) do
+		newMessages = List.delete(messages, message)
+    {:noreply, {consumers, newMessages}}
+  end
+
+	def handle_call(:getPendingMessages, _from, {consumers, messages}) do
+		{:reply, messages, {consumers, messages}}
+	end
+
+	def handle_call(:getState, _from, state) do
+		{:reply, state, state}
 	end
 
 	"
 		Consumers
 	"
 
-	def handle_call({:addConsumer, consumer}, _from, {consumers}) do
-		{:reply, :ok, {consumers ++ [consumer]}}
+	def handle_call({:addConsumer, consumer}, _from, {consumers, messages}) do
+		{:reply, :ok, {consumers ++ [consumer], messages}}
 	end
 
-	def handle_call(:getConsumers, _from, {consumers}) do
-		{:reply, consumers, {consumers}}
+	def handle_call(:getConsumers, _from, {consumers, messages}) do
+		{:reply, consumers, {consumers, messages}}
 	end
 
 	"

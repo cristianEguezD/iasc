@@ -13,6 +13,10 @@ defmodule Consumer do
 		{:reply, :healthCheck, {}}
 	end
 
+	def handle_call(:getState, _from, state) do
+		{:reply, state, state}
+	end
+
 	def handle_cast({:processMessage, message}, {}) do
 		IO.puts(message)
 		message_processed = process(message)
