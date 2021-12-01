@@ -17,11 +17,15 @@ defmodule QueueManager.NormalQueue do
 		Messages
 	"
 
-	def handle_cast({:processMessage, message}, {[ch | ct], messages}) do
-		GenServer.cast(ch, {:processMessage, message})
+	def handle_cast({:processMessage, message}, {[], messages}) do
+		{:noreply, {[], messages ++ [message]}}
+	end
+
+	def handle_cast({:processMessage, message}, {[first_consumer | others_consumers], messages}) do
+		GenServer.cast(first_consumer, {:processMessage, message})
 		"Agrego el mensaje al estado hasta que tenga confirmado que se haya consumido totalmente"
 		Process.send_after(self, {:timeout, message}, @default_timeout)
-		{:noreply, {[ct | ch], messages ++ [message]}}
+		{:noreply, {others_consumers ++ [first_consumer], messages ++ [message]}}
 	end
 
 	def handle_info({:timeout, message}, {consumers, messages}) do
@@ -50,18 +54,18 @@ defmodule QueueManager.NormalQueue do
 	end
 
 	"
-		Health check
+		Health first_consumereck
 	"
 
-	def handle_call(:healthCheck, _from, state) do
-		{:reply, :healthCheck, state}
+	def handle_call(:healthfirst_consumereck, _from, state) do
+		{:reply, :healthfirst_consumereck, state}
 	end
 
 end
 
 """
 pid = GenServer.whereis(:queue_1)
-GenServer.call(pid,:healthCheck)
+GenServer.call(pid,:healthfirst_consumereck)
 """
 
 """
