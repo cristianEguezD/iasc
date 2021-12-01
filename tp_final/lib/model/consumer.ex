@@ -9,15 +9,15 @@ defmodule Consumer do
     {:ok, {}}
   end
 
-	def handle_call(:healthCheck, _from, {}) do
-		{:reply, :healthCheck, {}}
+	def handle_call(:health_check, _from, {}) do
+		{:reply, :health_check, {}}
 	end
 
-	def handle_call(:getState, _from, state) do
+	def handle_call(:get_state, _from, state) do
 		{:reply, state, state}
 	end
 
-	def handle_cast({:processMessage, message}, {}) do
+	def handle_cast({:process_message, message}, {}) do
 		IO.puts(message)
 		message_processed = process(message)
 		write_in_file(message_processed)
@@ -39,6 +39,6 @@ end
 	iex
 	c("consumer.ex")
 	{:ok, consumer} = GenServer.start_link(Consumer, {[]})
-	GenServer.cast(pid, {:processMessage, ~s({"message": "Esto es un mensaje en json"})})
+	GenServer.cast(pid, {:process_message, ~s({"message": "Esto es un mensaje en json"})})
 
 """

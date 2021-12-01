@@ -17,23 +17,23 @@ defmodule QueueManager.NormalQueue do
 		Messages
 	"
 
-	def handle_cast({:processMessage, message}, {[], messages}) do
+	def handle_cast({:process_message, message}, {[], messages}) do
 		{:noreply, {[], messages ++ [message]}}
 	end
 
-	def handle_cast({:processMessage, message}, {[first_consumer | others_consumers], messages}) do
-		GenServer.cast(first_consumer, {:processMessage, message})
+	def handle_cast({:process_message, message}, {[first_consumer | others_consumers], messages}) do
+		GenServer.cast(first_consumer, {:process_message, message})
 		"Agrego el mensaje al estado hasta que tenga confirmado que se haya consumido totalmente"
 		Process.send_after(self, {:timeout, message}, @default_timeout)
 		{:noreply, {others_consumers ++ [first_consumer], messages ++ [message]}}
 	end
 
 	def handle_info({:timeout, message}, {consumers, messages}) do
-		newMessages = List.delete(messages, message)
-    {:noreply, {consumers, newMessages}}
+		new_messages = List.delete(messages, message)
+    {:noreply, {consumers, new_messages}}
   end
 
-	def handle_call(:getState, _from, state) do
+	def handle_call(:get_state, _from, state) do
 		{:reply, state, state}
 	end
 
@@ -41,33 +41,32 @@ defmodule QueueManager.NormalQueue do
 		Consumers
 	"
 
-	def handle_call({:addConsumer, consumer}, _from, {consumers, messages}) do
+	def handle_call({:add_consumer, consumer}, _from, {consumers, messages}) do
 		{:reply, :ok, {consumers ++ [consumer], messages}}
 	end
 
 	"
-		Health first_consumereck
+		Healthcheck
 	"
 
-	def handle_call(:healthfirst_consumereck, _from, state) do
-		{:reply, :healthfirst_consumereck, state}
+	def handle_call(:health_check, _from, state) do
+		{:reply, :health_check, state}
 	end
 
 end
 
 """
 pid = GenServer.whereis(:queue_1)
-GenServer.call(pid,:healthfirst_consumereck)
+GenServer.call(pid,:health_check)
 """
 
 """
 	iex
 	c("normal_queue.ex")
 	{:ok, queue} = GenServer.start_link(QueueManager.NormalQueue, {[consumer]})
-	GenServer.cast(queue, {:processMessage, ~s({"message": "Esto es un mensaje en json"})})
-	GenServer.call(queue, {:addConsumer, :jorge})
-	GenServer.call(queue, {:addConsumer, :rama})
-	GenServer.call(queue, {:addConsumer, :berko})
-	GenServer.call(queue, :getConsumers)
+	GenServer.cast(queue, {:process_message, ~s({"message": "Esto es un mensaje en json"})})
+	GenServer.call(queue, {:add_consumer, :jorge})
+	GenServer.call(queue, {:add_consumer, :rama})
+	GenServer.call(queue, {:add_consumer, :berko})
 
 """
