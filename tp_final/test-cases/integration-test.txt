@@ -1,0 +1,11 @@
+iex
+c("normal_queue.ex")
+c("consumer.ex")
+{:ok, consumer} = GenServer.start_link(Consumer, {[]})
+{:ok, queue} = GenServer.start_link(QueueManager.NormalQueue, {[consumer], []})
+GenServer.cast(queue, {:processMessage, ~s({"message": "Esto es un mensaje en json"})})
+GenServer.call(queue, {:addConsumer, :jorge})
+GenServer.call(queue, {:addConsumer, :rama})
+GenServer.call(queue, {:addConsumer, :berko})
+GenServer.call(queue, :getConsumers)
+GenServer.call(queue, :getState)
