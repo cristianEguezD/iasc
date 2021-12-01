@@ -1,5 +1,5 @@
-c("normal_queue.ex")
-c("consumer.ex")
+IEx.Helpers.c("normal_queue.ex")
+IEx.Helpers.c("consumer.ex")
 {:ok, consumer_1} = GenServer.start_link(Consumer, {[]})
 {:ok, consumer_2} = GenServer.start_link(Consumer, {[]})
 {:ok, consumer_3} = GenServer.start_link(Consumer, {[]})
@@ -9,4 +9,3 @@ GenServer.cast(queue, {:process_message, ~s({"message": "Esto es un mensaje en j
 GenServer.call(queue, {:add_consumer, :jorge})
 GenServer.call(queue, {:add_consumer, :rama})
 GenServer.call(queue, {:add_consumer, :berko})
-GenServer.call(queue, :get_state)
