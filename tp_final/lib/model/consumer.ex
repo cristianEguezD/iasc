@@ -15,10 +15,18 @@ defmodule Consumer do
 
 	def handle_cast({:processMessage, message}, {}) do
 		IO.puts(message)
-		message_processed = :crypto.hash(:md5, message) |> Base.encode16()
+		message_processed = process(message)
+		write_in_file(message_processed)
+		{:noreply, {}}
+	end
+
+	defp process(message) do
+		:crypto.hash(:md5, message) |> Base.encode16()
+	end
+
+	defp write_in_file(message_processed) do
 		time = :os.system_time(:nanosecond)
 		File.write("#{time}-#{Node.self()}.data", message_processed)
-		{:noreply, {}}
 	end
 
 end
