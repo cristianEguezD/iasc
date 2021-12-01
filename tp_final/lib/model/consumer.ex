@@ -17,10 +17,11 @@ defmodule Consumer do
 		{:reply, state, state}
 	end
 
-	def handle_cast({:process_message, message}, {}) do
+	def handle_cast({:process_message, message, from}, {}) do
 		IO.puts(message)
 		message_processed = process(message)
 		write_in_file(message_processed)
+		GenServer.cast(from, {:processed_message, message})
 		{:noreply, {}}
 	end
 
