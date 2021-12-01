@@ -11,10 +11,6 @@ defmodule QueueManager.NormalQueue do
 		{:ok, init_arg}
 	end
 
-	# def init() do
-  #   {:ok, {[]}}
-  # end
-
 	def handle_cast({:processMessage, _message}, {consumers}) do
 		{:noreply, {consumers}}
 	end
@@ -34,7 +30,7 @@ defmodule QueueManager.NormalQueue do
 end
 
 """
-pid = GenServer.whereis(QueueManager.NormalQueue)
+pid = GenServer.whereis(:queue_1)
 GenServer.call(pid,:healthCheck)
 """
 

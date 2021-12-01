@@ -19,3 +19,25 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/tp_final](https://hexdocs.pm/tp_final).
 
+
+## Start a node
+
+```bash
+iex --sname node1 --cookie some_cookie -S mix
+```
+
+## Create a new queue
+```
+opts = [name: :queue_name]
+QueueManager.NormalQueue.Starter.start_queue(opts)
+```
+
+## Obtain queue PID
+```
+pid = GenServer.whereis(:queue_name)
+```
+
+## Healthcheck queue
+```
+GenServer.call(pid,:healthCheck)
+```
