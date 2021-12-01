@@ -11,13 +11,18 @@ defmodule QueueManager.NormalQueue do
 		{:ok, init_arg}
 	end
 
-	def handle_cast({:processMessage, _message}, {consumers}) do
-		{:noreply, {consumers}}
+	"
+		Messages
+	"
+
+	def handle_cast({:processMessage, message}, {[ch | ct]}) do
+		GenServer.cast(ch, {:processMessage, message})
+		{:noreply, {[ct | ch]}}
 	end
 
-	def handle_call(:healthCheck, _from, consumers) do
-		{:reply, :healthCheck, {consumers}}
-	end
+	"
+		Consumers
+	"
 
 	def handle_call({:addConsumer, consumer}, _from, {consumers}) do
 		{:reply, :ok, {consumers ++ [consumer]}}
@@ -25,6 +30,14 @@ defmodule QueueManager.NormalQueue do
 
 	def handle_call(:getConsumers, _from, {consumers}) do
 		{:reply, consumers, {consumers}}
+	end
+
+	"
+		Health check
+	"
+
+	def handle_call(:healthCheck, _from, state) do
+		{:reply, :healthCheck, state}
 	end
 
 end
@@ -37,10 +50,11 @@ GenServer.call(pid,:healthCheck)
 """
 	iex
 	c("normal_queue.ex")
-	{:ok, pid} = GenServer.start_link(NormalQueue, {[]})
-	GenServer.call(pid, {:addConsumer, :jorge})
-	GenServer.call(pid, {:addConsumer, :rama})
-	GenServer.call(pid, {:addConsumer, :berko})
-	GenServer.call(pid, :getConsumers)
+	{:ok, queue} = GenServer.start_link(QueueManager.NormalQueue, {[consumer]})
+	GenServer.cast(queue, {:processMessage, ~s({"message": "Esto es un mensaje en json"})})
+	GenServer.call(queue, {:addConsumer, :jorge})
+	GenServer.call(queue, {:addConsumer, :rama})
+	GenServer.call(queue, {:addConsumer, :berko})
+	GenServer.call(queue, :getConsumers)
 
 """
