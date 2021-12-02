@@ -6,8 +6,7 @@ defmodule QueueManager.NormalQueue do
 	@default_no_consumers 5000
 
 	def start_link(opts) do
-		name = Keyword.get(opts, :name, __MODULE__)
-		GenServer.start_link(__MODULE__, {[], []}, name: name)
+		GenServer.start_link(__MODULE__, {[], []})
 	end
 
 	def init(init_arg) do
