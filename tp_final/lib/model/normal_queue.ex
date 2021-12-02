@@ -27,7 +27,7 @@ defmodule QueueManager.NormalQueue do
 	end
 
 	def handle_cast({:process_message, message}, {[first_consumer | others_consumers], messages}) do
-		GenServer.cast(first_consumer, {:process_message, message, self})
+		GenServer.cast(first_consumer, {:process_message_transactional, message, self})
 		"Agrego el mensaje al estado hasta que tenga confirmado que se haya consumido totalmente"
 		Process.send_after(self, {:timeout, message}, @default_timeout)
 		{:noreply, {others_consumers ++ [first_consumer], messages ++ [message]}}
