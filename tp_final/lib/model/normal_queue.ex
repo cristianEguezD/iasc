@@ -1,5 +1,6 @@
 defmodule QueueManager.NormalQueue do
 	use GenServer
+	require Logger
 
 	@default_timeout 10000
 

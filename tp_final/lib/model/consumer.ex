@@ -1,7 +1,9 @@
 defmodule Consumer do
 	use GenServer
+	require Logger
 
 	def start_link() do
+		Logger.info("Consumer up with pid: #{inspect(self)}")
 		GenServer.start_link(__MODULE__)
 	end
 
@@ -29,7 +31,7 @@ defmodule Consumer do
 		{:noreply, {}}
 	end
 
-	defp process_message() do 
+	defp process_message(message) do 
 		IO.puts(message)
 		message_processed = process(message)
 		write_in_file(message_processed)
