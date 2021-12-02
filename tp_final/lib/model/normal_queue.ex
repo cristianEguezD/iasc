@@ -98,14 +98,3 @@ end
 pid = GenServer.whereis(:queue_1)
 GenServer.call(pid,:health_check)
 """
-
-"""
-	iex
-	c("normal_queue.ex")
-	{:ok, queue} = GenServer.start_link(QueueManager.NormalQueue, {[consumer]})
-	GenServer.cast(queue, {:process_message, ~s({"message": "Esto es un mensaje en json"})})
-	GenServer.call(queue, {:add_consumer, :jorge})
-	GenServer.call(queue, {:add_consumer, :rama})
-	GenServer.call(queue, {:add_consumer, :berko})
-
-"""

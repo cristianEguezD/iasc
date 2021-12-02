@@ -71,11 +71,3 @@ defmodule Consumer do
 	end
 
 end
-
-"""
-	iex
-	c("consumer.ex")
-	{:ok, consumer} = GenServer.start_link(Consumer, {[]})
-	GenServer.cast(pid, {:process_message, ~s({"message": "Esto es un mensaje en json"})})
-
-"""
