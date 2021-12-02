@@ -29,7 +29,7 @@ iex --sname node1 --cookie some_cookie -S mix
 ## Create a new queue
 ```
 opts = [name: :queue_name]
-QueueManager.NormalQueue.Starter.start_queue(opts)
+QueueManager.NormalQueue.Starter.start_link(opts)
 ```
 
 ## Obtain queue PID
@@ -40,4 +40,9 @@ pid = GenServer.whereis(:queue_name)
 ## Healthcheck queue
 ```
 GenServer.call(pid,:healthCheck)
+```
+
+## Send message through Horde
+```
+GenServer.call(QueueManager.NormalQueue.via_tuple(:queue_name), :get_state)
 ```

@@ -6,7 +6,8 @@ defmodule QueueManager.NormalQueue do
 	@default_no_consumers 5000
 
 	def start_link(opts) do
-		GenServer.start_link(__MODULE__, {[], []})
+		name = opts[:name]
+		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: []], name: via_tuple(name))
 	end
 
 	def init(init_arg) do
@@ -72,10 +73,15 @@ defmodule QueueManager.NormalQueue do
 
 	"
 		Consumers
+
+		{}
+
 	"
 
-	def handle_call({:add_consumer, consumer}, _from, {consumers, pending_confirm_messages}) do
-		{:reply, :ok, {consumers ++ [consumer], pending_confirm_messages}}
+	def handle_call({:register_consumer, consumer}, _from, state) do
+		consumers = get_consumers(state)
+		state = Keyword.put(state, :consumers, consumers ++ [consumer])
+		{:reply, :ok, state}
 	end
 
 	"
@@ -91,6 +97,11 @@ defmodule QueueManager.NormalQueue do
 		Logger.info(message)
 	end
 
+	defp get_consumers(state) do
+		Keyword.get(state, :consumers, [])
+	end
+
+	def via_tuple(name), do: {:via, Horde.Registry, {QueueManager.HordeRegistry, name}}
 end
 
 """
