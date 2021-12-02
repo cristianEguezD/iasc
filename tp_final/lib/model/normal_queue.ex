@@ -3,7 +3,7 @@ defmodule QueueManager.NormalQueue do
 	require Logger
 
 	@default_timeout 10000
-	@default_no_consumers_availability 5000
+	@default_no_consumers 5000
 
 	def start_link(opts) do
 		name = Keyword.get(opts, :name, __MODULE__)
@@ -16,16 +16,18 @@ defmodule QueueManager.NormalQueue do
 	end
 
 	"
-		Messages
+		Messages Succefully
 	"
 
+	
+	"For messages send with send_after"
 	def handle_info({:process_message, message}, state) do
 		handle_cast({:process_message, message}, state)
 	end
 
-	def handle_cast({:processed_message, message, _ }, {consumers, messages}) do
+	def handle_cast({:processed_message, message, _ }, {consumers, pending_confirm_messages}) do
 		log("Message #{message} processed succefully")
-		new_messages = List.delete(messages, message)
+		new_messages = List.delete(pending_confirm_messages, message)
 		{:noreply, {consumers, new_messages}}
 	end
 
@@ -33,31 +35,31 @@ defmodule QueueManager.NormalQueue do
 		Receive messages from producers
 	"
 
-	def handle_cast({:process_message, message}, {[], messages}) do
+	def handle_cast({:process_message, message}, {[], pending_confirm_messages}) do
 		Logger.warning("NO CONSUMERS")
-		Process.send_after(self, {:process_message, message}, @default_no_consumers_availability)
-		{:noreply, {[], messages}}
+		Process.send_after(self, {:process_message, message}, @default_no_consumers)
+		{:noreply, {[], pending_confirm_messages}}
 	end
 
-	def handle_cast({:process_message, message}, {[first_consumer | others_consumers], messages}) do
+	def handle_cast({:process_message, message}, {[first_consumer | others_consumers], pending_confirm_messages}) do
 		log("Message #{message} comes for processing")
 		GenServer.cast(first_consumer, {:process_message_transactional, message, self})
 		Process.send_after(self, {:timeout, message}, @default_timeout)
-		{:noreply, {others_consumers ++ [first_consumer], messages ++ [message]}}
+		{:noreply, {others_consumers ++ [first_consumer], pending_confirm_messages ++ [message]}}
 	end
 
 	"
 		Timeout consumers response
 	"
 
-	def handle_info({:timeout, message}, {consumers, messages}) do
-		if(Enum.member?(messages, message)) do
+	def handle_info({:timeout, message}, {consumers, pending_confirm_messages}) do
+		if(Enum.member?(pending_confirm_messages, message)) do
 			log("Message #{message} has been expired")
-			new_messages = List.delete(messages, message)
+			new_messages = List.delete(pending_confirm_messages, message)
 			handle_cast({:process_message, message}, {consumers, new_messages})
 		else
 			log("Customer has procees #{message}, aborting timeout")
-			{:noreply, {consumers, messages}}
+			{:noreply, {consumers, pending_confirm_messages}}
 		end
   end
 
@@ -73,8 +75,8 @@ defmodule QueueManager.NormalQueue do
 		Consumers
 	"
 
-	def handle_call({:add_consumer, consumer}, _from, {consumers, messages}) do
-		{:reply, :ok, {consumers ++ [consumer], messages}}
+	def handle_call({:add_consumer, consumer}, _from, {consumers, pending_confirm_messages}) do
+		{:reply, :ok, {consumers ++ [consumer], pending_confirm_messages}}
 	end
 
 	"
