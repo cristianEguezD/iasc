@@ -3,21 +3,34 @@ defmodule Consumer do
 	require Logger
 
 	def start_link() do
-		Logger.info("Consumer up with pid: #{inspect(self)}")
 		GenServer.start_link(__MODULE__)
 	end
 
 	def init(state) do
+		log("Consumer up with pid: #{inspect(self)}")
     {:ok, {}}
   end
 
+	"
+		Health check
+	"
+
 	def handle_call(:health_check, _from, {}) do
+		log("I am alive dog")
 		{:reply, :health_check, {}}
 	end
+
+	"
+		Getter
+	"
 
 	def handle_call(:get_state, _from, state) do
 		{:reply, state, state}
 	end
+
+	"
+		Process Message
+	"
 
 	def handle_cast({:process_message_transactional, message, from}, {}) do
 		process_message(message)
@@ -31,8 +44,12 @@ defmodule Consumer do
 		{:noreply, {}}
 	end
 
+	"
+		Functions
+	"
+
 	defp process_message(message) do 
-		IO.puts(message)
+		log("Message #{message} comes from queue!")
 		message_processed = process(message)
 		write_in_file(message_processed)
 	end
@@ -44,7 +61,13 @@ defmodule Consumer do
 	defp write_in_file(message_processed) do
 		time = :os.system_time(:nanosecond)
 		pid = "#{inspect self()}"
-		File.write("#{time}-#{Node.self()}-#{pid}.data", message_processed)
+		file_name = "#{time}-#{Node.self()}-#{pid}.data"
+		File.write(file_name, message_processed)
+		log("A message was processed with result in: #{file_name}")
+	end
+
+	defp log(message) do
+		Logger.info(message)
 	end
 
 end
