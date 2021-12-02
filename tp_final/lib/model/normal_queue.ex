@@ -19,11 +19,11 @@ defmodule QueueManager.NormalQueue do
 		Messages
 	"
 
-	def handle_info({:process_message, message}, state) do 
+	def handle_info({:process_message, message}, state) do
 		handle_cast({:process_message, message}, state)
 	end
 
-	def handle_cast({:processed_message, message}, {consumers, messages}) do
+	def handle_cast({:processed_message, message, _ }, {consumers, messages}) do
 		log("Message #{message} processed succefully")
 		new_messages = List.delete(messages, message)
 		{:noreply, {consumers, new_messages}}
@@ -52,10 +52,10 @@ defmodule QueueManager.NormalQueue do
 
 	def handle_info({:timeout, message}, {consumers, messages}) do
 		if(Enum.member?(messages, message)) do
-			log("Message #{message} has been expired") 
+			log("Message #{message} has been expired")
 			new_messages = List.delete(messages, message)
 			handle_cast({:process_message, message}, {consumers, new_messages})
-		else 
+		else
 			log("Customer has procees #{message}, aborting timeout")
 			{:noreply, {consumers, messages}}
 		end
@@ -85,7 +85,7 @@ defmodule QueueManager.NormalQueue do
 		log("I am alive dog")
 		{:reply, :health_check, state}
 	end
-	
+
 	defp log(message) do
 		Logger.info(message)
 	end

@@ -34,12 +34,12 @@ defmodule Consumer do
 
 	def handle_cast({:process_message_transactional, message, from}, {}) do
 		process_message(message)
-		GenServer.cast(from, {:processed_message, message})
+		GenServer.cast(from, {:processed_message, message, self})
 		{:noreply, {}}
 	end
 
 	def handle_cast({:process_message_no_transactional, message, from}, {}) do
-		GenServer.cast(from, {:processed_message, message})
+		GenServer.cast(from, {:processed_message, message, self})
 		process_message(message)
 		{:noreply, {}}
 	end
@@ -48,7 +48,7 @@ defmodule Consumer do
 		Functions
 	"
 
-	defp process_message(message) do 
+	defp process_message(message) do
 		log("Message #{message} comes from queue!")
 		message_processed = process(message)
 		write_in_file(message_processed)
