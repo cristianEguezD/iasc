@@ -7,18 +7,18 @@ defmodule QueueManager.BroadCastQueue do
 
 	def start_link(opts) do
 		name = Keyword.get(opts, :name, __MODULE__)
-		log("Starting broadcast queue with name: #{name}")
+		Logger.info("Starting broadcast queue with name: #{name}")
 		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: [], name: name], name: via_tuple(name))
 	end
 
 	def init(state) do
-		log("Broadcast queue up with pid: #{inspect self()}")
+		Logger.info("Broadcast queue up!")
     {:ok, state}
   end
 
 	"For messages send when consumers are empty"
 	def handle_info({:process_message, message}, state) do
-		log("Re-queuing message as there are no consumers")
+		Logger.info("Re-queuing message as there are no consumers")
 		handle_cast({:process_message, message}, state)
 	end
 
@@ -48,6 +48,7 @@ defmodule QueueManager.BroadCastQueue do
 	def handle_cast({:process_message, message}, state) do
 		consumers = state[:consumers]
 		if length(consumers) == 0 do 
+			Logger.warn("No consumers available in #{state[:name]}, retrying later")
 			Process.send_after(self, {:process_message, message}, @default_no_consumers)
 			{:noreply, state}
 		else 
@@ -82,7 +83,7 @@ defmodule QueueManager.BroadCastQueue do
 	"
 
 	def handle_call({:register_consumer, consumer}, _from, state) do
-		log("Registering consumer #{consumer}")
+		Logger.info("Registering consumer #{consumer}")
 		consumers = state[:consumers]
 		state = Keyword.put(state, :consumers, consumers ++ [consumer])
 		{:reply, :ok, state}
@@ -99,10 +100,6 @@ defmodule QueueManager.BroadCastQueue do
 		Enum.find(pending_confirm_messages, fn({message, _}) ->
       processed_message == message
     end)
-	end
-
-	defp log(message) do
-		Logger.info(message)
 	end
 
 	def via_tuple(name), do: {:via, Horde.Registry, {QueueManager.HordeRegistry, name}}

@@ -7,12 +7,12 @@ defmodule QueueManager.NormalQueue do
 
 	def start_link(opts) do
 		name = opts[:name]
-		log("Starting queue with name: #{name}")
+		Logger.info("Starting queue with name: #{name}")
 		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: [], name: name], name: via_tuple(name))
 	end
 
 	def init(init_arg) do
-		log("Queue up with pid: #{inspect self()}")
+		Logger.info("Queue up with pid: #{inspect self()}")
 		{:ok, init_arg}
 	end
 
@@ -22,12 +22,12 @@ defmodule QueueManager.NormalQueue do
 
 	"For messages send when consumers are empty"
 	def handle_info({:process_message, message}, state) do
-		log("Re-queuing message as there are no consumers")
+		Logger.info("Re-queuing message as there are no consumers")
 		handle_cast({:process_message, message}, state)
 	end
 
 	def handle_cast({:processed_message, message, _ }, state) do
-		log("Message #{message} processed succefully for consumer, cleaning pending messages")
+		Logger.info("Message #{message} processed succefully for consumer, cleaning pending messages")
 		pending_confirm_messages = state[:pending_confirm_messages]
 		new_messages = List.delete(pending_confirm_messages, message)
 		state = Keyword.put(state, :pending_confirm_messages, new_messages)
@@ -45,16 +45,16 @@ defmodule QueueManager.NormalQueue do
 	# end
 
 	def handle_cast({:process_message, message}, state) do
-		log("Message #{message} comes for processing")
+		Logger.info("Message #{message} comes for processing")
 		consumers = get_consumers(state)
 
 		if length(consumers) == 0 do
-			log("No consumers available, retrying later")
+			Logger.warn("No consumers available in #{state[:name]}, retrying later")
 			Process.send_after(self, {:process_message, message}, @default_no_consumers)
 			{:noreply, state}
 		else
 			[first_consumer | others_consumers] = consumers
-			log("Sending message to #{first_consumer}")
+			Logger.info("Sending message to #{first_consumer}")
 			pending_confirm_messages = state[:pending_confirm_messages]
 			GenServer.cast(Consumer.via_tuple(first_consumer), {:process_message_transactional, message, state[:name]})
 			Process.send_after(self, {:timeout, message}, @default_timeout)
@@ -73,12 +73,12 @@ defmodule QueueManager.NormalQueue do
 	def handle_info({:timeout, message}, state) do
 		pending_confirm_messages = state[:pending_confirm_messages]
 		if(Enum.member?(pending_confirm_messages, message)) do
-			log("Message #{message} has been expired")
+			Logger.info("Message #{message} has been expired")
 			new_messages = List.delete(pending_confirm_messages, message)
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			handle_cast({:process_message, message}, state)
 		else
-			log("Consumer has procees #{message}, aborting timeout")
+			Logger.info("Consumer has procees #{message}, aborting timeout")
 			{:noreply, state}
 		end
   end
@@ -96,7 +96,7 @@ defmodule QueueManager.NormalQueue do
 	"
 
 	def handle_call({:register_consumer, consumer}, _from, state) do
-		log("Registering consumer #{consumer}")
+		Logger.info("Registering consumer #{consumer}")
 		consumers = get_consumers(state)
 		state = Keyword.put(state, :consumers, consumers ++ [consumer])
 		{:reply, :ok, state}
@@ -107,12 +107,8 @@ defmodule QueueManager.NormalQueue do
 	"
 
 	def handle_call(:health_check, _from, state) do
-		log("I am alive dog")
+		Logger.info("I am alive dog")
 		{:reply, :health_check, state}
-	end
-
-	defp log(message) do
-		Logger.info(message)
 	end
 
 	defp get_consumers(state) do
