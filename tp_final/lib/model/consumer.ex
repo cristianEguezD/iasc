@@ -2,22 +2,26 @@ defmodule Consumer do
 	use GenServer
 	require Logger
 
-	def start_link() do
-		GenServer.start_link(__MODULE__)
+	alias QueueManager.{HordeRegistry, HordeSupervisor}
+  alias QueueManager.{NormalQueue}
+
+	def start_link(opts) do
+		name = opts[:name]
+		GenServer.start_link(__MODULE__, [name: name], name: via_tuple(name))
 	end
 
 	def init(state) do
 		log("Consumer up with pid: #{inspect(self)}")
-    {:ok, {}}
+    {:ok, state}
   end
 
 	"
 		Health check
 	"
 
-	def handle_call(:health_check, _from, {}) do
+	def handle_call(:health_check, _from, state) do
 		log("I am alive dog")
-		{:reply, :health_check, {}}
+		{:reply, :health_check, state}
 	end
 
 	"
@@ -32,16 +36,24 @@ defmodule Consumer do
 		Process Message
 	"
 
-	def handle_cast({:process_message_transactional, message, from}, {}) do
+	def handle_cast({:process_message_transactional, message, from}, state) do
 		process_message(message)
 		GenServer.cast(from, {:processed_message, message, self})
-		{:noreply, {}}
+		{:noreply, state}
 	end
 
-	def handle_cast({:process_message_no_transactional, message, from}, {}) do
+	def handle_cast({:process_message_no_transactional, message, from}, state) do
 		GenServer.cast(from, {:processed_message, message, self})
 		process_message(message)
-		{:noreply, {}}
+		{:noreply, state}
+	end
+
+	def handle_call({:register_in_queue, queue_name}, _from, state) do
+		log("Registering in queue: #{queue_name}")
+		name = state[:name]
+		log("consumer: #{name}")
+		register_in_queue(queue_name, name)
+		{:reply, :ok, state}
 	end
 
 	"
@@ -61,13 +73,38 @@ defmodule Consumer do
 	defp write_in_file(message_processed) do
 		time = :os.system_time(:nanosecond)
 		pid = "#{inspect self()}"
-		file_name = "#{time}-#{Node.self()}-#{pid}.data"
+		file_name = "results/#{time}-#{Node.self()}-#{pid}.data"
 		File.write(file_name, message_processed)
 		log("A message was processed with result in: #{file_name}")
+	end
+
+	defp register_in_queue(queue_name, consumer_name) do
+		log("Registering in queue: #{queue_name}")
+		GenServer.call(NormalQueue.via_tuple(queue_name), {:register_consumer, consumer_name})
 	end
 
 	defp log(message) do
 		Logger.info(message)
 	end
+
+	def via_tuple(name), do: {:via, Horde.Registry, {HordeRegistry, name}}
+
+	def start_in_cluster(opts) do
+		name =
+      opts
+      |> Keyword.get(:name, Consumer)
+
+    opts = Keyword.put(opts, :name, name)
+
+    child_spec = %{
+      id: name,
+      start: {Consumer, :start_link, [opts]}
+    }
+
+    HordeSupervisor.start_child(child_spec)
+
+    :ignore
+  end
+
 
 end

@@ -1,5 +1,5 @@
 defmodule QueueManager.NormalQueue do
-	use GenServer
+	use GenServer, Agent
 	require Logger
 
 	@default_timeout 10000
@@ -19,47 +19,65 @@ defmodule QueueManager.NormalQueue do
 		Messages Succefully
 	"
 
-	
+
 	"For messages send with send_after"
 	def handle_info({:process_message, message}, state) do
 		handle_cast({:process_message, message}, state)
 	end
 
-	def handle_cast({:processed_message, message, _ }, {consumers, pending_confirm_messages}) do
+	def handle_cast({:processed_message, message, _ }, state) do
 		log("Message #{message} processed succefully")
+		pending_confirm_messages = state[:pending_confirm_messages]
 		new_messages = List.delete(pending_confirm_messages, message)
-		{:noreply, {consumers, new_messages}}
+		state = Keyword.put(state, :pending_confirm_messages, new_messages)
+		{:noreply, state}
 	end
 
 	"
 		Receive messages from producers
 	"
 
-	def handle_cast({:process_message, message}, {[], pending_confirm_messages}) do
-		Logger.warning("NO CONSUMERS")
-		Process.send_after(self, {:process_message, message}, @default_no_consumers)
-		{:noreply, {[], pending_confirm_messages}}
-	end
+	# def handle_cast({:process_message, message}, [consumers: []]) do
+	# 	Logger.warning("NO CONSUMERS")
+	# 	Process.send_after(self, {:process_message, message}, @default_no_consumers)
+	# 	{:noreply, {[], pending_confirm_messages}}
+	# end
 
-	def handle_cast({:process_message, message}, {[first_consumer | others_consumers], pending_confirm_messages}) do
+	def handle_cast({:process_message, message}, state) do
 		log("Message #{message} comes for processing")
-		GenServer.cast(first_consumer, {:process_message_transactional, message, self})
-		Process.send_after(self, {:timeout, message}, @default_timeout)
-		{:noreply, {others_consumers ++ [first_consumer], pending_confirm_messages ++ [message]}}
+		consumers = get_consumers(state)
+
+		if length(consumers) == 0 do
+			Process.send_after(self, {:process_message, message}, @default_no_consumers)
+			{:noreply, state}
+		else
+			[first_consumer | others_consumers] = consumers
+			log("Sending message to #{first_consumer}")
+			pending_confirm_messages = state[:pending_confirm_messages]
+			GenServer.cast(Consumer.via_tuple(first_consumer), {:process_message_transactional, message, self})
+			Process.send_after(self, {:timeout, message}, @default_timeout)
+			consumers = others_consumers ++ [first_consumer]
+			pending_confirm_messages = pending_confirm_messages ++ [message]
+			state = Keyword.put(state, :consumers, consumers)
+			state = Keyword.put(state, :pending_confirm_messages, pending_confirm_messages)
+			{:noreply, state}
+		end
 	end
 
 	"
 		Timeout consumers response
 	"
 
-	def handle_info({:timeout, message}, {consumers, pending_confirm_messages}) do
+	def handle_info({:timeout, message}, state) do
+		pending_confirm_messages = state[:pending_confirm_messages]
 		if(Enum.member?(pending_confirm_messages, message)) do
 			log("Message #{message} has been expired")
 			new_messages = List.delete(pending_confirm_messages, message)
-			handle_cast({:process_message, message}, {consumers, new_messages})
+			state = Keyword.put(state, :pending_confirm_messages, new_messages)
+			handle_cast({:process_message, message}, state)
 		else
 			log("Customer has procees #{message}, aborting timeout")
-			{:noreply, {consumers, pending_confirm_messages}}
+			{:noreply, state}
 		end
   end
 
