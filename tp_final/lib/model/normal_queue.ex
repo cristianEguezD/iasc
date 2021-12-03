@@ -12,7 +12,7 @@ defmodule QueueManager.NormalQueue do
 	end
 
 	def init(init_arg) do
-		Logger.info("Queue up with pid: #{inspect self()}")
+		Logger.info("Normal queue up!")
 		{:ok, init_arg}
 	end
 

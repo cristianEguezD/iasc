@@ -7,12 +7,12 @@ defmodule Consumer do
 
 	def start_link(opts) do
 		name = opts[:name]
-		log("Starting queue with name: #{name}")
+		Logger.info("Starting queue with name: #{name}")
 		GenServer.start_link(__MODULE__, [name: name], name: via_tuple(name))
 	end
 
 	def init(state) do
-		log("Consumer up with pid: #{inspect self()}")
+		Logger.info("Consumer up!")
     {:ok, state}
   end
 
@@ -21,7 +21,7 @@ defmodule Consumer do
 	"
 
 	def handle_call(:health_check, _from, state) do
-		log("I am alive dog")
+		Logger.info("I am alive dog")
 		{:reply, :health_check, state}
 	end
 
@@ -55,7 +55,7 @@ defmodule Consumer do
 
 	def handle_call({:register_in_queue, queue_name}, _from, state) do
 		name = state[:name]
-		log("Registering in queue '#{queue_name}' consumer '#{name}'")
+		Logger.info("Registering in queue '#{queue_name}' consumer '#{name}'")
 		register_in_queue(queue_name, name)
 		{:reply, :ok, state}
 	end
@@ -65,7 +65,7 @@ defmodule Consumer do
 	"
 
 	defp process_message(message, consumer_name) do
-		log("Message #{message} comes from queue!")
+		Logger.info("Message #{message} comes from queue!")
 		message_processed = process(message)
 		write_in_file(message_processed, consumer_name)
 	end
@@ -79,15 +79,11 @@ defmodule Consumer do
 		pid = "#{inspect self()}"
 		file_name = "results/#{consumer_name}-#{Node.self()}-#{pid}-#{time}.data"
 		File.write(file_name, message_processed)
-		log("A message was processed with result in: #{file_name}")
+		Logger.info("A message was processed with result in: #{file_name}")
 	end
 
 	defp register_in_queue(queue_name, consumer_name) do
 		GenServer.call(NormalQueue.via_tuple(queue_name), {:register_consumer, consumer_name})
-	end
-
-	defp log(message) do
-		Logger.info(message)
 	end
 
 	def via_tuple(name), do: {:via, Horde.Registry, {HordeRegistry, name}}
