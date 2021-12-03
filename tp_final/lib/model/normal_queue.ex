@@ -22,7 +22,7 @@ defmodule QueueManager.NormalQueue do
 
 	"For messages send with send_after"
 	def handle_info({:process_message, message}, state) do
-		log("Re-queuing message as there are no consumers")
+		log("Re-enqueuing message since there are no consumers")
 		handle_cast({:process_message, message}, state)
 	end
 
@@ -78,7 +78,7 @@ defmodule QueueManager.NormalQueue do
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			handle_cast({:process_message, message}, state)
 		else
-			log("Consumer has procees #{message}, aborting timeout")
+			log("Consumer has process #{message}, aborting timeout")
 			{:noreply, state}
 		end
   end
