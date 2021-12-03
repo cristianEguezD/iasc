@@ -38,14 +38,18 @@ defmodule Consumer do
 	"
 
 	def handle_cast({:process_message_transactional, message, from}, state) do
-		process_message(message, state[:name])
-		GenServer.cast(from, {:processed_message, message, self})
+		process_name = state[:name]
+		process_message(message, process_name)
+		from_name = NormalQueue.via_tuple(from)
+		GenServer.cast(from_name, {:processed_message, message, process_name})
 		{:noreply, state}
 	end
 
 	def handle_cast({:process_message_no_transactional, message, from}, state) do
-		GenServer.cast(from, {:processed_message, message, self})
-		process_message(message, state[:name])
+		process_name = state[:name]
+		from_name = NormalQueue.via_tuple(from)
+		GenServer.cast(from_name, {:processed_message, message, process_name})
+		process_message(message, process_name)
 		{:noreply, state}
 	end
 

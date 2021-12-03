@@ -8,7 +8,7 @@ defmodule QueueManager.NormalQueue do
 	def start_link(opts) do
 		name = opts[:name]
 		log("Starting queue with name: #{name}")
-		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: []], name: via_tuple(name))
+		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: [], name: name], name: via_tuple(name))
 	end
 
 	def init(init_arg) do
@@ -20,7 +20,7 @@ defmodule QueueManager.NormalQueue do
 		Messages Succefully
 	"
 
-	"For messages send with send_after"
+	"For messages send when consumers are empty"
 	def handle_info({:process_message, message}, state) do
 		log("Re-queuing message as there are no consumers")
 		handle_cast({:process_message, message}, state)
@@ -56,7 +56,7 @@ defmodule QueueManager.NormalQueue do
 			[first_consumer | others_consumers] = consumers
 			log("Sending message to #{first_consumer}")
 			pending_confirm_messages = state[:pending_confirm_messages]
-			GenServer.cast(Consumer.via_tuple(first_consumer), {:process_message_transactional, message, self})
+			GenServer.cast(Consumer.via_tuple(first_consumer), {:process_message_transactional, message, state[:name]})
 			Process.send_after(self, {:timeout, message}, @default_timeout)
 			consumers = others_consumers ++ [first_consumer]
 			pending_confirm_messages = pending_confirm_messages ++ [message]
@@ -93,9 +93,6 @@ defmodule QueueManager.NormalQueue do
 
 	"
 		Consumers
-
-		{}
-
 	"
 
 	def handle_call({:register_consumer, consumer}, _from, state) do

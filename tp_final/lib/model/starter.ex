@@ -6,7 +6,7 @@ defmodule QueueManager.NormalQueue.Starter do
   require Logger
 
   alias QueueManager.{HordeRegistry, HordeSupervisor}
-  alias QueueManager.{NormalQueue}
+  alias QueueManager.{NormalQueue, BroadCastQueue}
 
   def child_spec(opts) do
     %{
@@ -17,7 +17,7 @@ defmodule QueueManager.NormalQueue.Starter do
     }
   end
 
-  def start_link(opts) do
+  def start_normal_queue(opts) do
 		name =
       opts
       |> Keyword.get(:name, NormalQueue)
@@ -27,6 +27,23 @@ defmodule QueueManager.NormalQueue.Starter do
     child_spec = %{
       id: name,
       start: {NormalQueue, :start_link, [opts]}
+    }
+
+    HordeSupervisor.start_child(child_spec)
+
+    :ignore
+  end
+
+	def start_broadcast_queue(opts) do
+		name =
+      opts
+      |> Keyword.get(:name, BroadCastQueue)
+
+    opts = Keyword.put(opts, :name, name)
+
+    child_spec = %{
+      id: name,
+      start: {BroadCastQueue, :start_link, [opts]}
     }
 
     HordeSupervisor.start_child(child_spec)
