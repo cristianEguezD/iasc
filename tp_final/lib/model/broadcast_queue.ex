@@ -7,12 +7,13 @@ defmodule QueueManager.BroadCastQueue do
 
 	def start_link(opts) do
 		name = Keyword.get(opts, :name, __MODULE__)
-		log("Starting queue with name: #{name}")
+		log("Starting broadcast queue with name: #{name}")
 		GenServer.start_link(__MODULE__, [], name: name)
 	end
 
-	def init({consumers, sended_messages}) do
-    {:ok, {consumers, sended_messages}}
+	def init(state) do
+		log("Broadcast queue up with pid: #{inspect self()}")
+    {:ok, state}
   end
 
 	"mensajes procesados"
