@@ -1,0 +1,389 @@
+[00:58:31.436] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.329.0> 
+[00:58:31.460] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.339.0> 
+[00:58:31.466] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.342.0> 
+[01:02:21.896] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:02:21.922] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:02:21.930] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:03:12.997] [info] Consumer up with pid: #PID<0.292.0> mfa=Consumer.log/1 file=lib/model/consumer.ex line=87 pid=<0.292.0> 
+[01:04:20.876] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:04:20.901] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:04:20.909] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:04:40.212] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:04:40.246] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:04:40.253] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:06:19.763] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:06:19.790] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:06:19.798] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:07:27.753] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:07:29.566] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:07:29.583] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:07:29.583] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:07:29.592] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:07:29.600] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:07:47.519] [info] star link mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=117 pid=<0.276.0> 
+[01:07:47.519] [info] entre mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=117 pid=<0.284.0> 
+[01:08:48.228] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:08:49.763] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:08:49.779] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:08:49.780] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:08:49.791] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:08:49.801] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:08:56.084] [info] Normal queue up with pid: [current_function: {Process, :info, 1}, initial_call: {:proc_lib, :init_p, 5}, status: :running, message_queue_len: 0, links: [#PID<0.276.0>, #PID<0.272.0>], dictionary: ["$initial_call": {QueueManager.NormalQueue, :init, 1}, "$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.262.0>]], trap_exit: false, error_handler: :error_handler, priority: :normal, group_leader: #PID<0.261.0>, total_heap_size: 233, heap_size: 233, stack_size: 23, reductions: 42, garbage_collection: [max_heap_size: %{error_logger: true, kill: true, size: 0}, min_bin_vheap_size: 46422, min_heap_size: 233, fullsweep_after: 65535, minor_gcs: 0], suspending: []] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=115 pid=<0.284.0> 
+[01:11:17.169] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:11:18.571] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.244.0> 
+[01:11:18.590] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:11:18.590] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:11:18.602] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.254.0> 
+[01:11:18.609] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.257.0> 
+[01:11:35.501] [info] Normal queue up with pid: [current_function: {Process, :info, 1}, initial_call: {:proc_lib, :init_p, 5}, status: :running, message_queue_len: 0, links: [#PID<0.258.0>, #PID<0.254.0>], dictionary: ["$initial_call": {QueueManager.NormalQueue, :init, 1}, "$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.244.0>]], trap_exit: false, error_handler: :error_handler, priority: :normal, group_leader: #PID<0.243.0>, total_heap_size: 233, heap_size: 233, stack_size: 23, reductions: 42, garbage_collection: [max_heap_size: %{error_logger: true, kill: true, size: 0}, min_bin_vheap_size: 46422, min_heap_size: 233, fullsweep_after: 65535, minor_gcs: 0], suspending: []] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=115 pid=<0.266.0> 
+[01:12:43.632] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:12:45.232] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:12:45.252] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:12:45.252] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:12:45.262] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:12:45.269] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:12:51.370] [info] %{self()} mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=116 pid=<0.284.0> 
+[01:12:51.377] [info] Normal queue up with pid: [current_function: {Process, :info, 1}, initial_call: {:proc_lib, :init_p, 5}, status: :running, message_queue_len: 0, links: [#PID<0.276.0>, #PID<0.272.0>], dictionary: ["$initial_call": {QueueManager.NormalQueue, :init, 1}, "$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.262.0>]], trap_exit: false, error_handler: :error_handler, priority: :normal, group_leader: #PID<0.261.0>, total_heap_size: 752, heap_size: 376, stack_size: 23, reductions: 281, garbage_collection: [max_heap_size: %{error_logger: true, kill: true, size: 0}, min_bin_vheap_size: 46422, min_heap_size: 233, fullsweep_after: 65535, minor_gcs: 2], suspending: []] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=116 pid=<0.284.0> 
+[01:13:10.444] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:13:11.778] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:13:11.795] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:13:11.795] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:13:11.806] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:13:11.816] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:13:28.239] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:13:30.049] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:13:30.074] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:13:30.074] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:13:30.086] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:13:30.097] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:14:00.091] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:14:02.364] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:14:02.382] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:14:02.382] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:14:02.391] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:14:02.398] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:14:07.782] [info] #PID<0.284.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=116 pid=<0.284.0> 
+[01:14:07.784] [info] Normal queue up with pid: [current_function: {Process, :info, 1}, initial_call: {:proc_lib, :init_p, 5}, status: :running, message_queue_len: 0, links: [#PID<0.276.0>, #PID<0.272.0>], dictionary: ["$initial_call": {QueueManager.NormalQueue, :init, 1}, "$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.262.0>]], trap_exit: false, error_handler: :error_handler, priority: :normal, group_leader: #PID<0.261.0>, total_heap_size: 1220, heap_size: 610, stack_size: 23, reductions: 319, garbage_collection: [max_heap_size: %{error_logger: true, kill: true, size: 0}, min_bin_vheap_size: 46422, min_heap_size: 233, fullsweep_after: 65535, minor_gcs: 1], suspending: []] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=116 pid=<0.284.0> 
+[01:20:18.333] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:20:19.908] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:20:19.925] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:20:19.925] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:20:19.934] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:20:19.941] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:20:25.246] [info] #PID<0.284.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=116 pid=<0.284.0> 
+[01:20:25.249] [info] Normal queue up with pid: ["$initial_call": {QueueManager.NormalQueue, :init, 1}, "$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.262.0>]] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=116 pid=<0.284.0> 
+[01:23:14.555] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:23:15.923] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:23:15.941] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:23:15.941] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:23:15.952] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:23:15.959] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:23:21.202] [info] Normal queue up with pid: #PID<0.284.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=116 pid=<0.284.0> 
+[01:24:37.576] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:24:39.654] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:24:39.669] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:24:39.670] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:24:39.677] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:24:39.684] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:24:45.932] [info] Normal queue up with pid: #PID<0.284.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=117 pid=<0.284.0> 
+[01:25:35.235] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:25:36.713] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:25:36.730] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:25:36.730] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:25:36.738] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:25:36.745] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:26:14.945] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:26:16.238] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:26:16.256] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:26:16.256] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:26:16.268] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:26:16.276] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:26:31.715] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:26:41.583] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:26:41.599] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:26:41.599] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:26:41.607] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:26:41.616] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:27:38.225] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:27:39.622] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:27:39.639] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:27:39.639] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:27:39.651] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:27:39.660] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:27:50.625] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:27:52.355] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:27:52.380] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:27:52.380] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:27:52.388] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:27:52.396] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:28:08.461] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:28:15.991] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:28:16.007] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:28:16.008] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:28:16.017] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:28:16.024] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:28:19.296] [info] [current_function: {Process, :info, 1}, initial_call: {:proc_lib, :init_p, 5}, status: :running, message_queue_len: 0, links: [#PID<0.276.0>, #PID<0.272.0>], dictionary: ["$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.262.0>], "$initial_call": {QueueManager.NormalQueue, :init, 1}], trap_exit: false, error_handler: :error_handler, priority: :normal, group_leader: #PID<0.261.0>, total_heap_size: 233, heap_size: 233, stack_size: 24, reductions: 44, garbage_collection: [max_heap_size: %{error_logger: true, kill: true, size: 0}, min_bin_vheap_size: 46422, min_heap_size: 233, fullsweep_after: 65535, minor_gcs: 0], suspending: []] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.284.0> 
+[01:28:19.296] [info] Normal queue up with pid: #PID<0.284.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.284.0> 
+[01:29:03.538] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:29:05.182] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:29:05.200] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:29:05.201] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:29:05.208] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:29:05.215] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:29:09.805] [info] [:"$initial_call", :"$ancestors"] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.284.0> 
+[01:29:09.807] [info] Normal queue up with pid: #PID<0.284.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.284.0> 
+[01:30:25.671] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:30:27.075] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:30:27.094] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:30:27.095] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:30:27.105] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:30:27.114] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:30:32.272] [info] ["$initial_call": {QueueManager.NormalQueue, :init, 1}, "$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.262.0>]] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.284.0> 
+[01:30:32.273] [info] Normal queue up with pid: #PID<0.284.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.284.0> 
+[01:31:09.308] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:31:11.032] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.262.0> 
+[01:31:11.054] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:31:11.054] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:31:11.063] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.272.0> 
+[01:31:11.071] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.275.0> 
+[01:31:15.825] [info] [name: :holits, "$initial_call": {QueueManager.NormalQueue, :init, 1}, "$ancestors": [QueueManager.HordeSupervisor.ProcessesSupervisor, QueueManager.HordeSupervisor.Supervisor, QueueManager.Supervisor, #PID<0.262.0>]] mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=119 pid=<0.284.0> 
+[01:31:15.825] [info] Normal queue up with pid: :holits mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=119 pid=<0.284.0> 
+[01:43:32.989] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:43:51.349] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.273.0> 
+[01:43:51.366] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:43:51.366] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:43:51.377] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.283.0> 
+[01:43:51.385] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.286.0> 
+[01:44:51.433] [info] Starting queue with name: queue_name mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.287.0> 
+[01:44:51.436] [info] Queue up with pid: #PID<0.295.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.295.0> 
+[01:45:01.554] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.276.0> 
+[01:45:01.556] [info] Consumer up with pid: #PID<0.406.0> mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.406.0> 
+[01:46:31.595] [info] ---- Node down: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.280.0> 
+[01:46:33.166] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.267.0> 
+[01:46:33.183] [info] ---- Node up: b@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.280.0> 
+[01:46:33.183] [info] [libcluster:horde_minimal_example] connected to :"b@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.266.0> 
+[01:46:33.193] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.277.0> 
+[01:46:33.201] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.280.0> 
+[01:46:51.044] [info] Starting queue with name: queue_name mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.281.0> 
+[01:46:51.046] [info] Queue up with pid: #PID<0.289.0> mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:47:33.153] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.276.0> 
+[01:47:50.061] [info] Starting queue with name: consumer2 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:47:50.062] [info] Consumer up with pid: #PID<0.765.0> mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:47:52.968] [info] Starting queue with name: consumer3 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:47:52.969] [info] Consumer up with pid: #PID<0.766.0> mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:47:55.339] [info] Starting queue with name: consumer4 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.276.0> 
+[01:47:55.339] [info] Consumer up with pid: #PID<0.431.0> mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.431.0> 
+[01:48:10.130] [info] Registering in queue 'queue_name' consumer 'consumer1' mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.406.0> 
+[01:48:10.131] [info] Registering consumer consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:21.662] [info] Registering in queue 'queue_name' consumer 'consumer2' mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:48:21.662] [info] Registering consumer consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:30.348] [info] Registering in queue 'queue_name' consumer 'consumer3' mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:48:30.348] [info] Registering consumer consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:35.466] [info] Registering in queue 'queue_name' consumer 'consumer4' mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.431.0> 
+[01:48:35.467] [info] Registering consumer consumer4 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:51.494] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:51.494] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:51.495] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.406.0> 
+[01:48:51.510] [info] A message was processed with result in: results/consumer1-a@geronimo-HP-250-G7-Notebook-PC-#PID<0.406.0>-1638506931510348651.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.406.0> 
+[01:48:51.510] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:52.327] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:52.327] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:52.327] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:48:52.349] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638506932349425953.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:48:52.349] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:53.064] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:53.064] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:53.064] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:48:53.064] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638506933064311565.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:48:53.064] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:54.927] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:54.927] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.431.0> 
+[01:48:54.927] [info] Sending message to consumer4 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:48:54.928] [info] A message was processed with result in: results/consumer4-a@geronimo-HP-250-G7-Notebook-PC-#PID<0.431.0>-1638506934928008531.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.431.0> 
+[01:48:54.928] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:49:01.495] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:49:02.328] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:49:03.064] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:49:04.928] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:51:46.754] [info] ---- Node down: a@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.285.0> 
+[01:51:46.755] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:51:46.755] [info] Consumer up with pid: #PID<0.781.0> mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:51:46.755] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:51:46.755] [info] Starting queue with name: consumer4 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:51:46.755] [info] Consumer up with pid: #PID<0.782.0> mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:52:01.221] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.261.0> 
+[01:52:01.238] [info] ---- Node up: a@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.285.0> 
+[01:52:01.239] [info] [libcluster:horde_minimal_example] connected to :"a@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.271.0> 
+[01:52:01.251] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.271.0> 
+[01:52:01.259] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.274.0> 
+[01:52:11.832] [info] ---- Node down: a@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.285.0> 
+[01:52:11.833] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:52:11.834] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:52:11.834] [info] Starting queue with name: consumer4 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:52:13.073] [info] Starting app... mfa=QueueManager.Application.start/2 file=lib/queue_manager/application.ex line=11 pid=<0.261.0> 
+[01:52:13.089] [info] ---- Node up: a@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=36 pid=<0.285.0> 
+[01:52:13.089] [info] [libcluster:horde_minimal_example] connected to :"a@geronimo-HP-250-G7-Notebook-PC" mfa=Cluster.Logger.info/2 file=lib/logger.ex line=15 pid=<0.271.0> 
+[01:52:13.099] [info] Starting Horde.RegistryImpl with name QueueManager.HordeRegistry mfa=Horde.RegistryImpl.init/1 file=lib/horde/registry_impl.ex line=65 pid=<0.271.0> 
+[01:52:13.107] [info] Starting Horde.DynamicSupervisorImpl with name QueueManager.HordeSupervisor mfa=Horde.DynamicSupervisorImpl.init/1 file=lib/horde/dynamic_supervisor_impl.ex line=44 pid=<0.274.0> 
+[01:52:22.170] [info] Starting queue with name: queue_name mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.281.0> 
+[01:52:25.154] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=87 pid=<0.275.0> 
+[01:52:27.830] [info] Registering in queue 'queue_name' consumer 'consumer1' mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:52:27.830] [info] Registering consumer consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:36.748] [info] Registering in queue 'queue_name' consumer 'consumer2' mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:52:36.748] [info] Registering consumer consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:41.092] [info] Registering in queue 'queue_name' consumer 'consumer3' mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:52:41.093] [info] Registering consumer consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:46.145] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:46.145] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:46.145] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:52:46.145] [info] A message was processed with result in: results/consumer1-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.781.0>-1638507166145601626.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:52:46.145] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.085] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.085] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.085] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:52:47.085] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638507167085241194.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:52:47.085] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.440] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.440] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.440] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:52:47.441] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638507167440843657.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:52:47.441] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.823] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.823] [info] Sending message to consumer4 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:47.823] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:52:47.823] [info] A message was processed with result in: results/consumer4-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.782.0>-1638507167823339237.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:52:47.823] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:48.560] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:48.561] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:48.561] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:52:48.561] [info] A message was processed with result in: results/consumer1-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.781.0>-1638507168561245120.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:52:48.561] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:48.823] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:48.823] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:48.823] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:52:48.824] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638507168823877515.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:52:48.824] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.014] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.014] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.014] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:52:49.014] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638507169014464336.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:52:49.014] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.134] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.134] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.135] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:52:49.135] [info] A message was processed with result in: results/consumer1-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.781.0>-1638507169135168486.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:52:49.135] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.403] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.403] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.403] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:52:49.403] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638507169403664829.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:52:49.404] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.642] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.643] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.643] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:52:49.643] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638507169643185918.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:52:49.643] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.917] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.917] [info] Sending message to consumer4 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:49.917] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:52:49.917] [info] A message was processed with result in: results/consumer4-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.782.0>-1638507169917449653.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:52:49.917] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:56.146] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:57.085] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:57.441] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:57.823] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:58.561] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:58.824] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:59.014] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:59.135] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:59.404] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:59.643] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:52:59.917] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:29.692] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:29.692] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:29.692] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:29.693] [info] A message was processed with result in: results/consumer1-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.781.0>-1638507209692939457.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:29.693] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:34.945] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:34.945] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:34.945] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:34.946] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638507214945601318.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:34.946] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:35.545] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:35.546] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:35.546] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:35.546] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638507215546154965.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:35.546] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:35.738] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:35.738] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:35.738] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:35.738] [info] A message was processed with result in: results/consumer1-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.781.0>-1638507215738399929.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:35.738] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.237] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.237] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.238] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:36.238] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638507216238107255.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:36.238] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.266] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.266] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.266] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:36.267] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638507216266978239.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:36.267] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.300] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.300] [info] Sending message to consumer4 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.300] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:53:36.300] [info] A message was processed with result in: results/consumer4-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.782.0>-1638507216300572140.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:53:36.301] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.331] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.331] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.331] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:36.331] [info] A message was processed with result in: results/consumer1-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.781.0>-1638507216331425709.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:36.332] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.362] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.362] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.362] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:36.363] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638507216362946299.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:36.363] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.390] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.390] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.390] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:36.391] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638507216390823394.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:36.391] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.419] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.419] [info] Sending message to consumer1 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.419] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:36.420] [info] A message was processed with result in: results/consumer1-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.781.0>-1638507216420078903.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.781.0> 
+[01:53:36.420] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.450] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.450] [info] Sending message to consumer2 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.450] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:36.450] [info] A message was processed with result in: results/consumer2-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.765.0>-1638507216450557227.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.765.0> 
+[01:53:36.450] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.481] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.481] [info] Sending message to consumer3 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.481] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:36.481] [info] A message was processed with result in: results/consumer3-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.766.0>-1638507216481337164.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.766.0> 
+[01:53:36.481] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.512] [info] Message {"message": "Esto es un mensaje en json 1"} comes for processing mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.512] [info] Sending message to consumer4 mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:36.512] [info] Message {"message": "Esto es un mensaje en json 1"} comes from queue! mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:53:36.513] [info] A message was processed with result in: results/consumer4-b@geronimo-HP-250-G7-Notebook-PC-#PID<0.782.0>-1638507216512688072.data mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.782.0> 
+[01:53:36.513] [info] Message {"message": "Esto es un mensaje en json 1"} processed succefully for consumer, cleaning pending messages mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:39.693] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:44.946] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:45.546] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:45.738] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.238] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.267] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.301] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.331] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.363] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.391] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.420] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.450] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.481] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:53:46.513] [info] Consumer has procees {"message": "Esto es un mensaje en json 1"}, aborting timeout mfa=QueueManager.NormalQueue.log/1 file=lib/model/normal_queue.ex line=118 pid=<0.289.0> 
+[01:54:06.240] [info] ---- Node down: a@geronimo-HP-250-G7-Notebook-PC ---- mfa=QueueManager.NodeObserver.handle_info/2 file=lib/observer/NodeObserver.ex line=24 pid=<0.285.0> 
+[01:54:06.241] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:54:06.241] [info] Starting queue with name: consumer1 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 
+[01:54:06.241] [info] Starting queue with name: consumer4 mfa=Consumer.log/1 file=lib/model/consumer.ex line=86 pid=<0.281.0> 

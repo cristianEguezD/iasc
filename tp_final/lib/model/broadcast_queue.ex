@@ -7,7 +7,7 @@ defmodule QueueManager.BroadCastQueue do
 
 	def start_link(opts) do
 		name = Keyword.get(opts, :name, __MODULE__)
-		IO.puts(:stdio, name)
+		log("Starting queue with name: #{name}")
 		GenServer.start_link(__MODULE__, [], name: name)
 	end
 
@@ -75,6 +75,10 @@ defmodule QueueManager.BroadCastQueue do
 		Enum.find(sended_messages, fn({processed_message,_}) ->
       processed_message == message
     end)
+	end
+
+	defp log(message) do
+		Logger.info(message)
 	end
 
 end

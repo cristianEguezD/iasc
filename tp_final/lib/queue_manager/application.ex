@@ -4,9 +4,11 @@ defmodule QueueManager.Application do
   @moduledoc false
 
   use Application
+	require Logger
 
   @impl true
   def start(_type, _args) do
+		Logger.info("Starting app...")
     children = [
       {Cluster.Supervisor, [topologies(), [name: MinimalExample.ClusterSupervisor]]},
       QueueManager.HordeRegistry,
