@@ -16,6 +16,12 @@ defmodule QueueManager.BroadCastQueue do
     {:ok, state}
   end
 
+	"For messages send when consumers are empty"
+	def handle_info({:process_message, message}, state) do
+		log("Re-queuing message as there are no consumers")
+		handle_cast({:process_message, message}, state)
+	end
+
 	"mensajes procesados"
 	def handle_cast({:processed_message, processed_message, consumer}, state) do
 		consumers = state[:consumers]
