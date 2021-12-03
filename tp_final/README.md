@@ -29,7 +29,7 @@ iex --sname node1 --cookie some_cookie -S mix
 ## Create a new queue
 ```
 opts = [name: :queue_name]
-QueueManager.NormalQueue.Starter.start_queue(opts)
+QueueManager.NormalQueue.Starter.start_link(opts)
 ```
 
 ## Obtain queue PID
@@ -40,4 +40,31 @@ pid = GenServer.whereis(:queue_name)
 ## Healthcheck queue
 ```
 GenServer.call(pid,:healthCheck)
+```
+
+## Send message through Horde
+```
+GenServer.call(QueueManager.NormalQueue.via_tuple(:queue_name), :get_state)
+```
+
+## Create consumer
+```
+Consumer.start_in_cluster([name: :consumer1])
+```
+
+## Register consumer
+```
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name})
+```
+
+
+
+## Full example
+```
+opts = [name: :queue_name]
+QueueManager.NormalQueue.Starter.start_link(opts)
+Consumer.start_in_cluster([name: :consumer1])
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name})
+
+GenServer.cast(QueueManager.NormalQueue.via_tuple(:queue_name), {:process_message, ~s({"message": "Esto es un mensaje en json 1"})})
 ```

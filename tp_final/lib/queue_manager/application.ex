@@ -11,8 +11,7 @@ defmodule QueueManager.Application do
       {Cluster.Supervisor, [topologies(), [name: MinimalExample.ClusterSupervisor]]},
       QueueManager.HordeRegistry,
       QueueManager.HordeSupervisor,
-      QueueManager.NodeObserver.Supervisor,
-      { QueueManager.NormalQueue.Starter,[name: :queue_1]},
+      QueueManager.NodeObserver.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html for other strategies and supported options
