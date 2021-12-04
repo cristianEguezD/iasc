@@ -22,7 +22,7 @@ defmodule QueueManager.NormalQueue do
 
 	"For messages send when consumers are empty"
 	def handle_info({:process_message, message}, state) do
-		Logger.info("Re-queuing message as there are no consumers")
+		Logger.info("Re-enqueuing message since there are no consumers")
 		handle_cast({:process_message, message}, state)
 	end
 
@@ -78,7 +78,7 @@ defmodule QueueManager.NormalQueue do
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			handle_cast({:process_message, message}, state)
 		else
-			Logger.info("Consumer has procees #{message}, aborting timeout")
+			Logger.info("Consumer has process #{message}, aborting timeout")
 			{:noreply, state}
 		end
   end
