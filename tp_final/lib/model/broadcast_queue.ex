@@ -26,8 +26,8 @@ defmodule QueueManager.BroadCastQueue do
 	def handle_cast({:processed_message, processed_message, consumer}, state) do
 		consumers = state[:consumers]
 		pending_confirm_messages = state[:pending_confirm_messages]
-		message_to_delete = {sended_message, consumers_to_notify} = findMessage(pending_confirm_messages, processed_message)
-		Logger.info("Message #{sended_message} processed by consumer: #{inspect consumer}")
+		message_to_delete = {sent_message, consumers_to_notify} = findMessage(pending_confirm_messages, processed_message)
+		Logger.info("Message #{sent_message} processed by consumer: #{inspect consumer}")
 		remaining_consumers_to_notify = List.delete(consumers_to_notify, consumer)
 		remaining_pending_confirm_messages = List.delete(pending_confirm_messages, message_to_delete)
 		if(remaining_consumers_to_notify == [] ) do
@@ -36,8 +36,8 @@ defmodule QueueManager.BroadCastQueue do
 			{:noreply, state}
 		else
 			Logger.info("There are still consumers who did not answer with ACK: #{inspect remaining_consumers_to_notify}")
-			updated_sended_message = {sended_message, remaining_consumers_to_notify}
-			state = Keyword.put(state, :pending_confirm_messages, remaining_pending_confirm_messages ++ [{sended_message, remaining_consumers_to_notify}])
+			updated_sent_message = {sent_message, remaining_consumers_to_notify}
+			state = Keyword.put(state, :pending_confirm_messages, remaining_pending_confirm_messages ++ [{sent_message, remaining_consumers_to_notify}])
 			{:noreply, state}
 		end
 
@@ -66,13 +66,13 @@ defmodule QueueManager.BroadCastQueue do
 	"mensajes autoenviados"
 	def handle_info({:timeout, message}, state) do
 		pending_confirm_messages = state[:pending_confirm_messages]
-	  sended_message = findMessage(pending_confirm_messages, message)
-		if(sended_message == nil) do
+	  sent_message = findMessage(pending_confirm_messages, message)
+		if(sent_message == nil) do
 			Logger.info("Consumers has procees #{message}, aborting timeout")
 			{:noreply, state}
 		else
 			Logger.info("The message is not completely consumed and the time expired")
-			new_messages = List.delete(pending_confirm_messages, sended_message)
+			new_messages = List.delete(pending_confirm_messages, sent_message)
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			{:noreply, state}
 		end

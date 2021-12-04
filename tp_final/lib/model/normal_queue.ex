@@ -45,7 +45,7 @@ defmodule QueueManager.NormalQueue do
 	# end
 
 	def handle_cast({:process_message, message}, state) do
-		Logger.info("Message #{message} comes for processing")
+		Logger.info("Message #{message} comes to be processed")
 		consumers = get_consumers(state)
 
 		if length(consumers) == 0 do
@@ -78,7 +78,7 @@ defmodule QueueManager.NormalQueue do
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			handle_cast({:process_message, message}, state)
 		else
-			Logger.info("Consumer has process #{message}, aborting timeout")
+			Logger.info("Consumer has processed #{message}, aborting timeout")
 			{:noreply, state}
 		end
   end
