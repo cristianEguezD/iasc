@@ -61,10 +61,28 @@ GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name}
 
 ## Full example
 ```
-opts = [name: :queue_name]
-QueueManager.NormalQueue.Starter.start_link(opts)
-Consumer.start_in_cluster([name: :consumer1])
-GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name})
+opts = [name: :normal_queue]
+QueueManager.NormalQueue.Starter.start_normal_queue(opts)
 
-GenServer.cast(QueueManager.NormalQueue.via_tuple(:queue_name), {:process_message, ~s({"message": "Esto es un mensaje en json 1"})})
+opts = [name: :broadcast_queue]
+QueueManager.NormalQueue.Starter.start_broadcast_queue(opts)
+
+
+Consumer.start_in_cluster([name: :consumer1])
+Consumer.start_in_cluster([name: :consumer2])
+Consumer.start_in_cluster([name: :consumer3])
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
+GenServer.call(Consumer.via_tuple(:consumer2), {:register_in_queue, :normal_queue})
+GenServer.call(Consumer.via_tuple(:consumer3), {:register_in_queue, :normal_queue})
+GenServer.cast(QueueManager.NormalQueue.via_tuple(:normal_queue), {:process_message, ~s({"message": "Esto es un mensaje para la queue normal"})})
+
+Consumer.start_in_cluster([name: :consumer4])
+Consumer.start_in_cluster([name: :consumer5])
+Consumer.start_in_cluster([name: :consumer6])
+GenServer.call(Consumer.via_tuple(:consumer4), {:register_in_queue, :broadcast_queue})
+GenServer.call(Consumer.via_tuple(:consumer5), {:register_in_queue, :broadcast_queue})
+GenServer.call(Consumer.via_tuple(:consumer6), {:register_in_queue, :broadcast_queue})
+GenServer.cast(QueueManager.BroadCastQueue.via_tuple(:broadcast_queue), {:process_message, ~s({"message": "Esto es otro mensaje pero para la queue broadcast"})})
+
+
 ```

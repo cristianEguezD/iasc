@@ -10,7 +10,7 @@ config :logger,
 
 config :logger, :console,
   format: format,
-  metadata: [:mfa, :pid, :registered_name]
+  metadata: [:pid, :registered_name]
 
 config :logger, :logger_file_backend,
 	format: format,
