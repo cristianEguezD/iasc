@@ -7,11 +7,12 @@ defmodule QueueManager.NormalQueue do
 
 	def start_link(opts) do
 		name = opts[:name]
+		log("Starting queue with name: #{name}")
 		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: []], name: via_tuple(name))
 	end
 
 	def init(init_arg) do
-		log("Normal queue up with pid: #{inspect(self)}")
+		log("Queue up with pid: #{inspect self()}")
 		{:ok, init_arg}
 	end
 
@@ -19,14 +20,14 @@ defmodule QueueManager.NormalQueue do
 		Messages Succefully
 	"
 
-
 	"For messages send with send_after"
 	def handle_info({:process_message, message}, state) do
+		log("Re-enqueuing message since there are no consumers")
 		handle_cast({:process_message, message}, state)
 	end
 
 	def handle_cast({:processed_message, message, _ }, state) do
-		log("Message #{message} processed succefully")
+		log("Message #{message} processed succefully for consumer, cleaning pending messages")
 		pending_confirm_messages = state[:pending_confirm_messages]
 		new_messages = List.delete(pending_confirm_messages, message)
 		state = Keyword.put(state, :pending_confirm_messages, new_messages)
@@ -48,6 +49,7 @@ defmodule QueueManager.NormalQueue do
 		consumers = get_consumers(state)
 
 		if length(consumers) == 0 do
+			log("No consumers available, retrying later")
 			Process.send_after(self, {:process_message, message}, @default_no_consumers)
 			{:noreply, state}
 		else
@@ -76,7 +78,7 @@ defmodule QueueManager.NormalQueue do
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			handle_cast({:process_message, message}, state)
 		else
-			log("Customer has procees #{message}, aborting timeout")
+			log("Consumer has process #{message}, aborting timeout")
 			{:noreply, state}
 		end
   end
@@ -97,6 +99,7 @@ defmodule QueueManager.NormalQueue do
 	"
 
 	def handle_call({:register_consumer, consumer}, _from, state) do
+		log("Registering consumer #{consumer}")
 		consumers = get_consumers(state)
 		state = Keyword.put(state, :consumers, consumers ++ [consumer])
 		{:reply, :ok, state}

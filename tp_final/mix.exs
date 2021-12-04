@@ -22,6 +22,7 @@ defmodule QueueManager.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+			{:logger_file_backend, "== 0.0.10"},
       {:libcluster, "~> 3.3"},
       {:horde, "~> 0.8.3"}
     ]
