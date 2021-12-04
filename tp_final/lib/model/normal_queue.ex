@@ -22,12 +22,12 @@ defmodule QueueManager.NormalQueue do
 
 	"For messages send when consumers are empty"
 	def handle_info({:process_message, message}, state) do
-		Logger.info("Re-enqueuing message since there are no consumers")
+		Logger.info("Re-enqueuing message #{message[:id]} since there are no consumers")
 		handle_cast({:process_message, message}, state)
 	end
 
 	def handle_cast({:processed_message, message, _ }, state) do
-		Logger.info("Message #{message} processed succefully for consumer, cleaning pending messages")
+		Logger.info("Message #{message[:id]} processed succefully for consumer, cleaning pending messages")
 		pending_confirm_messages = state[:pending_confirm_messages]
 		new_messages = List.delete(pending_confirm_messages, message)
 		state = Keyword.put(state, :pending_confirm_messages, new_messages)
@@ -45,7 +45,7 @@ defmodule QueueManager.NormalQueue do
 	# end
 
 	def handle_cast({:process_message, message}, state) do
-		Logger.info("Message #{message} comes to be processed")
+		Logger.info("Message #{message[:id]} comes to be processed")
 		consumers = get_consumers(state)
 
 		if length(consumers) == 0 do
@@ -54,7 +54,7 @@ defmodule QueueManager.NormalQueue do
 			{:noreply, state}
 		else
 			[first_consumer | others_consumers] = consumers
-			Logger.info("Sending message to #{first_consumer}")
+			Logger.info("Sending message #{message[:id]} to #{first_consumer}")
 			pending_confirm_messages = state[:pending_confirm_messages]
 			GenServer.cast(Consumer.via_tuple(first_consumer), {:process_message_transactional, message, state[:name]})
 			Process.send_after(self, {:timeout, message}, @default_timeout)
@@ -73,12 +73,12 @@ defmodule QueueManager.NormalQueue do
 	def handle_info({:timeout, message}, state) do
 		pending_confirm_messages = state[:pending_confirm_messages]
 		if(Enum.member?(pending_confirm_messages, message)) do
-			Logger.info("Message #{message} has been expired")
+			Logger.info("Message #{message[:id]} has been expired")
 			new_messages = List.delete(pending_confirm_messages, message)
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			handle_cast({:process_message, message}, state)
 		else
-			Logger.info("Consumer has processed #{message}, aborting timeout")
+			Logger.info("Consumer has processed #{message[:id]}, aborting timeout")
 			{:noreply, state}
 		end
   end

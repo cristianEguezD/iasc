@@ -65,21 +65,21 @@ defmodule Consumer do
 	"
 
 	defp process_message(message, consumer_name) do
-		Logger.info("Message #{message} comes from queue!")
-		message_processed = process(message)
-		write_in_file(message_processed, consumer_name)
+		Logger.info("Message #{message[:id]} comes from queue!")
+		message_processed = process(message[:content])
+		write_in_file(message_processed, consumer_name, message[:id])
 	end
 
 	defp process(message) do
 		:crypto.hash(:md5, message) |> Base.encode16()
 	end
 
-	defp write_in_file(message_processed, consumer_name) do
+	defp write_in_file(message_processed, consumer_name, message_id) do
 		time = :os.system_time(:nanosecond)
 		pid = "#{inspect self()}"
-		file_name = "results/#{consumer_name}-#{Node.self()}-#{pid}-#{time}.data"
+		file_name = "results/#{consumer_name}-#{message_id}-#{Node.self()}-#{pid}-#{time}.data"
 		File.write(file_name, message_processed)
-		Logger.info("A message was processed with result in: #{file_name}")
+		Logger.info("Message #{message_id} was processed with result in: #{file_name}")
 	end
 
 	defp register_in_queue(queue_name, consumer_name) do
