@@ -13,7 +13,15 @@ defmodule QueueManager.NormalQueue do
 
 	def init(init_arg) do
 		Logger.info("Normal queue up!")
-		{:ok, init_arg}
+		name = QueueManager.QueueAgent.get_agent_name(init_arg[:name])
+		agent_pid = GenServer.whereis(via_tuple(name))
+		if agent_pid == nil do
+			{:ok, init_arg}
+		else
+			initial_state = QueueManager.QueueAgent.get_state(via_tuple(name))
+			{:ok, initial_state}
+		end
+
 	end
 
 	"
@@ -31,6 +39,7 @@ defmodule QueueManager.NormalQueue do
 		pending_confirm_messages = state[:pending_confirm_messages]
 		new_messages = List.delete(pending_confirm_messages, message)
 		state = Keyword.put(state, :pending_confirm_messages, new_messages)
+		update_agent_state(state)
 		{:noreply, state}
 	end
 
@@ -62,6 +71,7 @@ defmodule QueueManager.NormalQueue do
 			pending_confirm_messages = pending_confirm_messages ++ [message]
 			state = Keyword.put(state, :consumers, consumers)
 			state = Keyword.put(state, :pending_confirm_messages, pending_confirm_messages)
+			update_agent_state(state)
 			{:noreply, state}
 		end
 	end
@@ -99,6 +109,7 @@ defmodule QueueManager.NormalQueue do
 		Logger.info("Registering consumer #{consumer}")
 		consumers = get_consumers(state)
 		state = Keyword.put(state, :consumers, consumers ++ [consumer])
+		update_agent_state(state)
 		{:reply, :ok, state}
 	end
 
@@ -113,6 +124,11 @@ defmodule QueueManager.NormalQueue do
 
 	defp get_consumers(state) do
 		Keyword.get(state, :consumers, [])
+	end
+
+	defp update_agent_state(state) do 
+		agent_name = QueueManager.QueueAgent.get_agent_name(state[:name])
+		QueueManager.QueueAgent.set_state(QueueManager.QueueAgent.via_tuple(agent_name), state)
 	end
 
 	def via_tuple(name), do: {:via, Horde.Registry, {QueueManager.HordeRegistry, name}}

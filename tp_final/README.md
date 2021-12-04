@@ -63,10 +63,11 @@ GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name}
 ```
 opts = [name: :normal_queue]
 QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+QueueManager.QueueAgent.get_state(QueueManager.QueueAgent.via_tuple(:normal_queue_agent))
+QueueManager.QueueAgent.set_state(QueueManager.QueueAgent.via_tuple(:normal_queue_agent), [consumers: [], pending_confirm_messages: [], name: :normal_queue])
 
 opts = [name: :broadcast_queue]
 QueueManager.NormalQueue.Starter.start_broadcast_queue(opts)
-
 
 Consumer.start_in_cluster([name: :consumer1])
 Consumer.start_in_cluster([name: :consumer2])
