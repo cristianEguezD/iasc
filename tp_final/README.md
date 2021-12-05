@@ -76,7 +76,7 @@ GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queu
 GenServer.call(Consumer.via_tuple(:consumer2), {:register_in_queue, :normal_queue})
 GenServer.call(Consumer.via_tuple(:consumer3), {:register_in_queue, :normal_queue})
 normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
-GenServer.cast(QueueManager.NormalQueue.via_tuple(:normal_queue), {:process_message, [id: :mensaje_broadcast, content: normal_queue_message]})
+GenServer.cast(QueueManager.NormalQueue.via_tuple(:normal_queue), {:process_message, {:mensaje_broadcast, :hash, normal_queue_message}})
 
 Consumer.start_in_cluster([name: :consumer4])
 Consumer.start_in_cluster([name: :consumer5])
@@ -85,7 +85,20 @@ GenServer.call(Consumer.via_tuple(:consumer4), {:register_in_queue, :broadcast_q
 GenServer.call(Consumer.via_tuple(:consumer5), {:register_in_queue, :broadcast_queue})
 GenServer.call(Consumer.via_tuple(:consumer6), {:register_in_queue, :broadcast_queue})
 broadcast_queue_message = ~s({"message": "Esto es otro mensaje pero para la queue broadcast"})
-GenServer.cast(QueueManager.BroadCastQueue.via_tuple(:broadcast_queue), {:process_message, [id: :mensaje_broadcast, content: broadcast_queue_message]})
+GenServer.cast(QueueManager.BroadCastQueue.via_tuple(:broadcast_queue), {:process_message, {:mensaje_broadcast, :hash, broadcast_queue_message}})
 
+```
 
+## Example with producer
+
+```
+opts = [name: :normal_queue]
+QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+Consumer.start_in_cluster([name: :consumer1])
+
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
+
+normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
+Producer.produce_hash_message(:normal_queue, :id1, normal_queue_message)
+Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
 ```
