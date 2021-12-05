@@ -65,10 +65,13 @@ defmodule Consumer do
 		Functions
 	"
 
-	defp process_message(message, consumer_name) do
-		Logger.info("Message #{message[:id]} comes from queue!")
-		message_processed = process(message[:content])
-		write_in_file(message_processed, consumer_name, message[:id])
+	"
+		Process hash message
+	"
+	defp process_message({id, :hash, content}, consumer_name) do
+		Logger.info("Message #{id} comes from queue for hashing!")
+		message_processed = process(content)
+		write_in_file(message_processed, consumer_name, id)
 	end
 
 	defp process(message) do
@@ -81,6 +84,16 @@ defmodule Consumer do
 		file_name = "results/#{consumer_name}-#{message_id}-#{Node.self()}-#{pid}-#{time}.data"
 		File.write(file_name, message_processed)
 		Logger.info("Message #{message_id} was processed with result in: #{file_name}")
+	end
+
+	"
+		Process wait and hash message
+	"
+	defp process_message({id, {:wait, ms}, content}, consumer_name) do
+		Logger.info("Message #{id} comes from queue for wait and hashing!")
+		Process.sleep(ms)
+		message_processed = process(content)
+		write_in_file(message_processed, consumer_name, id)
 	end
 
 	defp register_in_queue(queue_name, consumer_name) do
