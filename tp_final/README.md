@@ -102,3 +102,16 @@ normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"}
 Producer.produce_hash_message(:normal_queue, :id1, normal_queue_message)
 Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
 ```
+
+### Broadcast queue
+```
+opts = [name: :broadcast_queue]
+QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+Consumer.start_in_cluster([name: :consumer1])
+
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
+
+normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
+Producer.produce_hash_message(:normal_queue, :id1, normal_queue_message)
+Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
+```
