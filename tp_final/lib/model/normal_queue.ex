@@ -112,9 +112,13 @@ defmodule QueueManager.NormalQueue do
 	def handle_call({:register_consumer, consumer}, _from, state) do
 		Logger.info("Registering consumer #{consumer}")
 		consumers = get_consumers(state)
-		state = Keyword.put(state, :consumers, consumers ++ [consumer])
-		update_agent_state(state)
-		{:reply, :ok, state}
+		if(Enum.member?(consumers, consumer)) do
+			{:reply, :ok, state}
+		else
+			state = Keyword.put(state, :consumers, consumers ++ [consumer])
+			update_agent_state(state)
+			{:reply, :ok, state}
+		end
 	end
 
 	"
