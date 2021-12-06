@@ -62,12 +62,12 @@ GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name}
 ## Full example
 ```
 opts = [name: :normal_queue]
-QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+QueueManager.NormalQueue.Starter.start_queue(opts, QueueManager.NormalQueue)
 QueueManager.QueueAgent.get_state(QueueManager.QueueAgent.via_tuple(:normal_queue_agent))
 QueueManager.QueueAgent.set_state(QueueManager.QueueAgent.via_tuple(:normal_queue_agent), [consumers: [], pending_confirm_messages: [], name: :normal_queue])
 
 opts = [name: :broadcast_queue]
-QueueManager.NormalQueue.Starter.start_broadcast_queue(opts)
+QueueManager.NormalQueue.Starter.start_queue(opts, QueueManager.BroadcastQueue)
 
 Consumer.start_in_cluster([name: :consumer1])
 Consumer.start_in_cluster([name: :consumer2])
@@ -91,9 +91,11 @@ GenServer.cast(QueueManager.BroadCastQueue.via_tuple(:broadcast_queue), {:proces
 
 ## Example with producer
 
+### Normal queue
+
 ```
 opts = [name: :normal_queue]
-QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+QueueManager.NormalQueue.Starter.start_queue(opts, QueueManager.NormalQueue)
 Consumer.start_in_cluster([name: :consumer1])
 
 GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
@@ -101,4 +103,18 @@ GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queu
 normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
 Producer.produce_hash_message(:normal_queue, :id1, normal_queue_message)
 Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
+```
+
+### Broadcast queue
+
+```
+opts = [name: :broadcast_queue]
+QueueManager.BroadcastQueue.Starter.start_queue(opts, QueueManager.BroadcastQueue)
+Consumer.start_in_cluster([name: :consumer1])
+
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :broadcast_queue})
+
+broadcast_queue_message = ~s({"message": "Esto es un mensaje para la broadcast queue"})
+Producer.produce_hash_message(:broadcast_queue, :id1, broadcast_queue_message)
+Producer.produce_wait_message(:broadcast_queue, :id2, broadcast_queue_message, 3000)
 ```

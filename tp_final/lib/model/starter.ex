@@ -17,11 +17,11 @@ defmodule QueueManager.NormalQueue.Starter do
     }
   end
 
-  def start_normal_queue(opts) do
+  def start_queue(opts, type) do
 
-		child_spec = calculate_child_spec(opts, NormalQueue)
+		child_spec = calculate_child_spec(opts, type)
 
-		{:ok, queue_name} = Map.fetch(child_spec, :id)
+		queue_name = child_spec[:id]
 		agent_name = QueueManager.QueueAgent.get_agent_name(queue_name)
 		agent_opts = [name: agent_name, initial_state: [consumers: [], pending_confirm_messages: [], name: queue_name]]
 
@@ -29,15 +29,6 @@ defmodule QueueManager.NormalQueue.Starter do
 
     HordeSupervisor.start_child(child_spec)
 		HordeSupervisor.start_child(agent_spec)
-
-    :ignore
-  end
-
-	def start_broadcast_queue(opts) do
-
-		child_spec = calculate_child_spec(opts, BroadCastQueue)
-
-    HordeSupervisor.start_child(child_spec)
 
     :ignore
   end
