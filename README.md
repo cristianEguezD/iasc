@@ -1,138 +1,117 @@
-# iasc
+# QueueManager
 
-### Comunicación
+**TODO: Add description**
 
-* [Meet](https://meet.google.com/the-undd-esq)
-* [Site](https://arquitecturas-concurrentes.github.io/)
-* [Discord](https://discord.com/invite/ywcmpBmy)
+## Installation
 
-### Administración
+If [available in Hex](https://hex.pm/docs/publish), the package can be installed
+by adding `tp_final` to your list of dependencies in `mix.exs`:
 
-* Parcial: 30/11. Único. 
-* TP: fecha **límite**. Semana del 7/12. Se toma la nota del TP como 2da nota.
+```elixir
+def deps do
+  [
+    {:tp_final, "~> 0.1.0"}
+  ]
+end
+```
 
-### Clase 1 - 17/08/2021
+Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
+and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
+be found at [https://hexdocs.pm/tp_final](https://hexdocs.pm/tp_final).
 
-Cada tarea tiene un contexto de ejecucion.
 
-* Concurrencia: sensacion de simultaniedad, no es en el mismo *t* . Se asocia un no determinismo. Multiples contextos de ejecucion asociados a un recurso.
-* Paralelismo: ejecución 
+## Start a node
 
-Mundo secuencial = mundo super seguro.
+```bash
+iex --sname node1 --cookie some_cookie -S mix
+```
 
-Green threads: jacketing (SO)
+## Create a new queue
+```
+opts = [name: :queue_name]
+QueueManager.NormalQueue.Starter.start_link(opts)
+```
 
-Ruby MRI: run single thread. Tiene GIL: global interpreter lock. Voluntariamente los threads de ruby ceden el thread nativo (a menos que tengan en lock activo, ahi si corren normal).
-  si bien hay un solo thread se pueden intercarlar los "procesos/threads" por lo que la concurrencia puede traer problemas. Se pueden intercarlar si el planificador asi lo dice, por algun cambio de contexto. Puede ser por IO, por un llamado a un método u otras cosas.
-  
-Ruby sobre jvm: bellísimo.
+## Obtain queue PID
+```
+pid = GenServer.whereis(:queue_name)
+```
 
-[Resumen](https://docs.google.com/document/d/1dgWxbj-XRmJuGuKW-BQVhXbAebWph5gb0OJ_hYBeAM8/edit)
+## Healthcheck queue
+```
+GenServer.call(pid,:healthCheck)
+```
 
-### Clase 2 - 24/08/2021
+## Send message through Horde
+```
+GenServer.call(QueueManager.NormalQueue.via_tuple(:queue_name), :get_state)
+```
 
-## Práctca con ruby
+## Create consumer
+```
+Consumer.start_in_cluster([name: :consumer1])
+```
 
-* Ambiente: mirar site o mail (deberían haber enviado algo).
-* Comunicación: por el canal de discord.
+## Register consumer
+```
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name})
+```
 
-# "INSERTAR" cuadro (armarlo)
 
-Respuestas:
 
-1) No, porque MRI trabaja con GIL lo que hace que haya como máximo un único thread activo.
+## Full example
+```
+opts = [name: :normal_queue]
+QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+QueueManager.QueueAgent.get_state(QueueManager.QueueAgent.via_tuple(:normal_queue_agent))
+QueueManager.QueueAgent.set_state(QueueManager.QueueAgent.via_tuple(:normal_queue_agent), [consumers: [], pending_confirm_messages: [], name: :normal_queue])
 
-2) Si, porque aunque solo pueda haber un único thread activo, cuando este se bloquea por IO implica un cambio de contexto, por lo que se puede enviar a ejecutar otro thread.
+opts = [name: :broadcast_queue]
+QueueManager.NormalQueue.Starter.start_broadcast_queue(opts)
 
-3) Si, porque con esto obtenemos paralelismo.
+Consumer.start_in_cluster([name: :consumer1])
+Consumer.start_in_cluster([name: :consumer2])
+Consumer.start_in_cluster([name: :consumer3])
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
+GenServer.call(Consumer.via_tuple(:consumer2), {:register_in_queue, :normal_queue})
+GenServer.call(Consumer.via_tuple(:consumer3), {:register_in_queue, :normal_queue})
+normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
+GenServer.cast(QueueManager.NormalQueue.via_tuple(:normal_queue), {:process_message, {:mensaje_broadcast, :hash, normal_queue_message}})
 
-4) No, porque se llega a un límite de los recursos disponibles de la máquina.
+Consumer.start_in_cluster([name: :consumer4])
+Consumer.start_in_cluster([name: :consumer5])
+Consumer.start_in_cluster([name: :consumer6])
+GenServer.call(Consumer.via_tuple(:consumer4), {:register_in_queue, :broadcast_queue})
+GenServer.call(Consumer.via_tuple(:consumer5), {:register_in_queue, :broadcast_queue})
+GenServer.call(Consumer.via_tuple(:consumer6), {:register_in_queue, :broadcast_queue})
+broadcast_queue_message = ~s({"message": "Esto es otro mensaje pero para la queue broadcast"})
+GenServer.cast(QueueManager.BroadCastQueue.via_tuple(:broadcast_queue), {:process_message, {:mensaje_broadcast, :hash, broadcast_queue_message}})
 
-5) Son de sistema operativo, los podemos ver con htop.
+```
 
-### Clase 3 - 31/08/2021
+## Example with producer
 
-Se menciono [Crawler](https://es.ryte.com/wiki/Crawler)
+```
+opts = [name: :normal_queue]
+QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+Consumer.start_in_cluster([name: :consumer1])
 
-Python
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
 
-yield <-> generador
+normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
+Producer.produce_hash_message(:normal_queue, :id1, normal_queue_message)
+Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
+```
 
-Al generador se le pide un valor (next).
+### Broadcast queue
+```
+opts = [name: :broadcast_queue]
+QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+Consumer.start_in_cluster([name: :consumer1])
 
-corrutinas: los-men-jugando-ajedrez
-bart: persona-hilo-proceso
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
 
-* threads. El planificador se encarga de desalojar los threads. Multitarea apropiativo.
-* corrutinas: 1 solo thread., ellas mismas ceden el control. Multitarea colaborativa. En python se hace con el **await**. **Async def** permite generar corrutinas? 
-* Las corrutinas entonces nos dan concurrencia. Peso de Thread en python 50kb, corrutina pesa 3kb.
-
-condicion de carrera: 2 o mas acceden 
-
-En ruby tenemos los Fiber que son similares a las corrutinas.
-
-GUILD thread de SO que permite ejecutar hilos de usuario como hilos de SO y estos pueden ejecutarse en cada procesador.
-
-### Clase 4 - 7/09/2021
-
-Evento: contexto de ejecucion. Node los planifica.
-
-### Clase 5 - 28/09/2021
-
-earlang - diseñado para ser distribuido y tolerante a fallos de manera nativa
-
-BEAM es la maquina virtual de Erlang.
-
-spawn crea un proceso (no es de SO, por lo tanto es muy barato) que hace lo que le pases como funcion. Retorna el pid. 
-
-Se puede hacer Process.alive?(pid) que nos dice si el proceso esta vivo o no.
-
-send <- directiva|privimita que permite que un proceso envie un mensaje a otro proceso (puede ser si mismo)
-
-recieve <- dice con pattern matching que sabe recibir o que entiende. Es bloqueante hasta que llega un mensaje.
-
-existe el concepto de mailbox..los procesos "miran" su mailbox. Funciona como una queue (orden papurri)
-
-el interprete es un proceso tambien (o sea, que tiene mailbox)
-
-#PID<0.120.0>
-
-0: local
-120: numero de proceso
-0: comunicaco con alguien de otra maquina
-
-spawn_link genera un proceso linkeado al padre, si el hijo muere y el padre no sabe que hacer tambien muere. Esto implica una relacion fuerte entre procesos, cuando uno no puede estar sin el otro.
-
-defmodule permite organizar funciones.
-
-OTP: Open Telecom Platform. OTP es una colección de middleware, bibliotecas y herramientas útiles escritas en el lenguaje de programación Erlang. Es una parte integral de la distribución de código abierto de Erlang.
-
-GenServer viene de OTP
-
-  handle_cast, es un fire and forget
-  handle_call
-
-### Clase 5 - 06/10/2021
-
-proceso: conteto de ejecucion que se pueden ejecutar en la vm (EBM). 
-
-genserver: nos permite levantar un proceso y enviar mensajes async o sync.
-agent: objetivo: guardar un dato y devolverlo. 
-
-use Supervisor: supervisa procesos..y si se mueren los vuelve a inicializar. Podes decir cuando se revisa, como se reviva y con que estado.
-
-:observer.start <-esta piolita jaja
-
-el supervisor tiene estrategias para revivir a los hijos.
-
-one_for_one: si el hijo (supervisado) muere crea otro (y obviamente lo sigue supervisando xd)
-
-one_for_all: si muere 1 hijo..mato a todos los hijos y revivo a todos. Si uno muere el resto no tiene sentido que sigan existiendo.
-
-rest_for_one: si se muere un hijo, mata a todos los hijos que fueron creados despues del que murio, luego los inicializa/revive.
-
-supervisor:
-	max_restarts: default=3, si se pasa se muere
-	max_seconcs: default =5s, el marco de tiempo en el que rige max_rstarts.
-
-OTP 23 - bancan hilos
+normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
+Producer.produce_hash_message(:normal_queue, :id1, normal_queue_message)
+Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
+```
