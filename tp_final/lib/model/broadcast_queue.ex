@@ -28,14 +28,14 @@ defmodule QueueManager.BroadCastQueue do
 
 	"For messages send when consumers are empty"
 	def handle_info({:process_message, message}, state) do
-		{id, _ , _} = message
+		{id, _ , _, _} = message
 		Logger.info("Re-queuing message #{id} as there are no consumers")
 		handle_cast({:process_message, message}, state)
 	end
 
 	"mensajes procesados"
 	def handle_cast({:processed_message, processed_message, consumer}, state) do
-		{id, _ , _} = processed_message
+		{id, _ , _, _} = processed_message
 		consumers = state[:consumers]
 		pending_confirm_messages = state[:pending_confirm_messages]
 		pending_message_to_delete = {sent_message, consumers_to_notify} = findMessage(pending_confirm_messages, processed_message)
@@ -60,7 +60,7 @@ defmodule QueueManager.BroadCastQueue do
 
 	def handle_cast({:process_message, message}, state) do
 		consumers = state[:consumers]
-		{id, _, _} = message
+		{id, _, _, transactional_type} = message
 		if length(consumers) == 0 do
 			Logger.warn("No consumers available in #{state[:name]}, retrying later")
 			Process.send_after(self, {:process_message, message}, @default_no_consumers)
@@ -68,7 +68,7 @@ defmodule QueueManager.BroadCastQueue do
 		else
 			Logger.info("Sending message #{id} to all customers: #{inspect consumers}")
 			Enum.each(consumers, fn consumer ->
-				GenServer.cast(Consumer.via_tuple(consumer), {:process_message_transactional, message, state[:name]})
+				GenServer.cast(Consumer.via_tuple(consumer), {transactional_type, message, state[:name]})
 			 end)
 			 Process.send_after(self, {:timeout, message}, @default_timeout * length(consumers))
 			 new_messages = state[:pending_confirm_messages] ++ [{message, consumers}]
@@ -80,7 +80,7 @@ defmodule QueueManager.BroadCastQueue do
 
 	"mensajes autoenviados"
 	def handle_info({:timeout, message}, state) do
-		{id, _ ,_ } = message
+		{id, _ ,_, _} = message
 		pending_confirm_messages = state[:pending_confirm_messages]
 	  sent_message = findMessage(pending_confirm_messages, message)
 		if(sent_message == nil) do
