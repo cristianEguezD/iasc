@@ -2,13 +2,13 @@ defmodule QueueManager.NormalQueue do
 	use GenServer
 	require Logger
 
-	@default_timeout 30000
+	@default_timeout 60000
 	@default_no_consumers 5000
 
 	def start_link(opts) do
 		name = opts[:name]
 		Logger.info("Starting queue with name: #{name}")
-		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: [], busy_consumers: [], name: name], name: via_tuple(name))
+		GenServer.start_link(__MODULE__, get_initial_state(name), name: via_tuple(name))
 	end
 
 	def init(init_arg) do
@@ -144,8 +144,11 @@ defmodule QueueManager.NormalQueue do
 	end
 
 	def via_tuple(name), do: {:via, Horde.Registry, {QueueManager.HordeRegistry, name}}
-end
 
+	def get_initial_state(process_name) do
+		[consumers: [], pending_confirm_messages: [], busy_consumers: [], name: process_name]
+	end
+end
 """
 pid = GenServer.whereis(:queue_1)
 GenServer.call(pid,:health_check)
