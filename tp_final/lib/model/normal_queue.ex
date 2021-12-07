@@ -12,13 +12,16 @@ defmodule QueueManager.NormalQueue do
 	end
 
 	def init(init_arg) do
+		queue_name = init_arg[:name]
 		Logger.info("Normal queue up!")
-		name = QueueManager.QueueAgent.get_agent_name(init_arg[:name])
-		agent_pid = GenServer.whereis(via_tuple(name))
+		agent_name = QueueManager.QueueAgent.get_agent_name(queue_name)
+		agent_pid = GenServer.whereis(via_tuple(agent_name))
 		if agent_pid == nil do
+			Logger.info("Agent #{agent_name} does not exist in the system, starting #{queue_name} with default state")
 			{:ok, init_arg}
 		else
-			initial_state = QueueManager.QueueAgent.get_state(via_tuple(name))
+			Logger.info("Agent #{agent_name} exist in the system, starting #{queue_name} with saved state")
+			initial_state = QueueManager.QueueAgent.get_state(via_tuple(agent_name))
 			{:ok, initial_state}
 		end
 

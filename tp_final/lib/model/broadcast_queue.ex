@@ -2,8 +2,8 @@ defmodule QueueManager.BroadCastQueue do
 	use GenServer
 	require Logger
 
-	@default_no_consumers 10000
-	@default_timeout 10000
+	@default_no_consumers 5000
+	@default_timeout 60000
 
 	def start_link(opts) do
 		name = opts[:name]
@@ -12,13 +12,16 @@ defmodule QueueManager.BroadCastQueue do
 	end
 
 	def init(state) do
+		queue_name = state[:name]
 		Logger.info("Broadcast queue up!")
-		name = QueueManager.QueueAgent.get_agent_name(state[:name])
-		agent_pid = GenServer.whereis(via_tuple(name))
+		agent_name = QueueManager.QueueAgent.get_agent_name(queue_name)
+		agent_pid = GenServer.whereis(via_tuple(agent_name))
 		if agent_pid == nil do
+			Logger.info("Agent #{agent_name} does not exist in the system, starting #{queue_name} with default state")
 			{:ok, state}
 		else
-			initial_state = QueueManager.QueueAgent.get_state(via_tuple(name))
+			Logger.info("Agent #{agent_name} exist in the system, starting #{queue_name} with saved state")
+			initial_state = QueueManager.QueueAgent.get_state(via_tuple(agent_name))
 			{:ok, initial_state}
 		end
   end

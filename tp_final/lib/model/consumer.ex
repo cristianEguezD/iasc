@@ -6,9 +6,8 @@ defmodule Consumer do
   alias QueueManager.{NormalQueue}
 
 	def start_link(opts) do
-		Logger.info("Start link: #{inspect opts}")
 		name = opts[:name]
-		Logger.info("Starting queue with name: #{name}")
+		Logger.info("Starting consumer with name: #{name}")
 		GenServer.start_link(__MODULE__, [name: name], name: via_tuple(name))
 	end
 
