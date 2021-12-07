@@ -155,6 +155,20 @@ defmodule QueueManager.NormalQueue do
 	def get_initial_state(process_name) do
 		[consumers: [], pending_confirm_messages: [], busy_consumers: [], name: process_name]
 	end
+
+	def handle_call({:delete_consumer, consumer}, _from, state) do
+		Logger.info("Deleting consumer #{consumer}")
+		consumers = state[:consumers]
+		if(Enum.member?(consumers, consumer)) do
+			new_consumers = List.delete(consumers, consumer)
+			state = Keyword.put(state, :consumers, new_consumers)
+			update_agent_state(state)
+			{:reply, :ok, state}
+		else
+			{:reply, :ok, state}
+		end
+	end
+
 end
 """
 pid = GenServer.whereis(:queue_1)

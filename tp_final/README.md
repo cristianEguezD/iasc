@@ -116,5 +116,8 @@ GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :broadcast_q
 broadcast_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
 Producer.produce_hash_message(:broadcast_queue, :id1, broadcast_queue_message)
 Producer.produce_wait_message(:broadcast_queue, :id2, broadcast_queue_message, 3000)
-Producer.produce_n_wait_messages(:broadcast_queue, :process_1, broadcast_queue_message, 3, 5000, 0, :process_message_no_transactional)
+Producer.produce_n_wait_messages(:broadcast_queue, :process_1, broadcast_queue_message, 1, 40000, 0, :process_message_transactional)
+
+GenServer.call(Consumer.via_tuple(:broadcast_queue), {:delete_consumer, :consumer1})
+
 ```
