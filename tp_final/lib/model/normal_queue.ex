@@ -2,7 +2,7 @@ defmodule QueueManager.NormalQueue do
 	use GenServer
 	require Logger
 
-	@default_timeout 10000
+	@default_timeout 60000
 	@default_no_consumers 5000
 
 	def start_link(opts) do
