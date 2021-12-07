@@ -1,19 +1,59 @@
 use Mix.Config
 
-format = "[$time] [$level] $message $metadata\n"
+[
+  read_from:              [
+    Bunyan.Source.Api,
+    Bunyan.Source.ErlangErrorLogger,
+  ],
+  write_to:               [
+    {
+      Bunyan.Writer.Device, [
+        name:  :stdout_logging,
 
-config :logger,
-	backends: [:console, {LoggerFileBackend, :logger_file_backend}],
-  compile_time_purge_matching: [
-		[level_lower_than: :info]
-	]
+        main_format_string:        "$time [$level] $remote_info$message_first_line",
+        additional_format_string:  "$message_rest\n$extra",
 
-config :logger, :console,
-  format: format,
-  metadata: [:pid, :registered_name]
+        level_colors:   %{
+          @debug => faint(),
+          @info  => green(),
+          @warn  => yellow(),
+          @error => light_red() <> bright(),
+        },
+        message_colors: %{
+          @debug => faint(),
+          @info  => reset(),
+          @warn  => yellow(),
+          @error => light_red(),
+        },
+        timestamp_color: faint(),
+        extra_color:     italic() <> faint(),
 
-config :logger, :logger_file_backend,
-	format: format,
-  path: "log.log",
-  level: :info,
-	metadata: [:registered_name, :mfa, :file, :line, :initial_call, :pid]
+        use_ansi_color?: true
+      ]
+    },
+    {
+      Bunyan.Writer.Device, [
+        name:  :critical_errors,
+        device:            "myapp_errors.log",
+        pid_file_name:     "myapp.pid",
+        rumtime_log_level: :error,
+        use_ansi_color?:   false,
+      ]
+    },
+    {
+       Bunyan.Writer.Remote, [
+
+          # assumes there's a Bunyan.Source.GlobalReader with
+          # `global_name: MyApp.GlobalLogger` running on
+          # the given two nodes
+
+          send_to: MyApp.GlobalLogger,
+          send_to_nodes:  [
+            :"main_logger@192.168.1.2",
+            :"backup_logger@192.68.1.2",
+          ],
+          runtime_log_level: :warn,
+      ]
+    },
+  ]
+]

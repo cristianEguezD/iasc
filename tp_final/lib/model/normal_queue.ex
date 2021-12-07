@@ -1,13 +1,14 @@
 defmodule QueueManager.NormalQueue do
 	use GenServer
 	require Logger
+	require Bunyan
 
 	@default_timeout 60000
 	@default_no_consumers 5000
 
 	def start_link(opts) do
 		name = opts[:name]
-		Logger.info("Starting queue with name: #{name}")
+		Bunyan.info("Starting queue with name: #{name}")
 		GenServer.start_link(__MODULE__, get_initial_state(name), name: via_tuple(name))
 	end
 
