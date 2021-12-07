@@ -27,10 +27,10 @@ defmodule QueueManager.BroadCastQueue do
   end
 
 	"For messages send when consumers are empty"
-	def handle_info({:process_message, message}, state) do
+	def handle_info({:process_message, message, transactional_type}, state) do
 		{id, _ , _} = message
 		Logger.info("Re-queuing message #{id} as there are no consumers")
-		handle_cast({:process_message, message}, state)
+		handle_cast({:process_message, message, transactional_type}, state)
 	end
 
 	"mensajes procesados"
@@ -58,19 +58,19 @@ defmodule QueueManager.BroadCastQueue do
 
 	"mensajes a procesar"
 
-	def handle_cast({:process_message, message}, state) do
+	def handle_cast({:process_message, message, transactional_type}, state) do
 		consumers = state[:consumers]
 		{id, _, _} = message
 		if length(consumers) == 0 do
 			Logger.warn("No consumers available in #{state[:name]}, retrying later")
-			Process.send_after(self, {:process_message, message}, @default_no_consumers)
+			Process.send_after(self, {:process_message, message, transactional_type}, @default_no_consumers)
 			{:noreply, state}
 		else
 			Logger.info("Sending message #{id} to all customers: #{inspect consumers}")
 			Enum.each(consumers, fn consumer ->
-				GenServer.cast(Consumer.via_tuple(consumer), {:process_message_transactional, message, state[:name]})
+				GenServer.cast(Consumer.via_tuple(consumer), {transactional_type, message, state[:name]})
 			 end)
-			 Process.send_after(self, {:timeout, message}, @default_timeout * length(consumers))
+			 Process.send_after(self, {:timeout, message, transactional_type}, @default_timeout)
 			 new_messages = state[:pending_confirm_messages] ++ [{message, consumers}]
 			 state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			 update_agent_state(state)
@@ -78,20 +78,35 @@ defmodule QueueManager.BroadCastQueue do
 		end
 	end
 
+	"Mensaje todavía no consumido por algunos consumidores"
+	def handle_cast({:process_message_laggard, message, transactional_type, pending_consumers}, state) do
+		{id, _ , _} = message
+		Logger.info("Lagging Message #{id}, appending again to the queue #{state[:name]}")
+		Enum.each(pending_consumers, fn consumer ->
+			GenServer.cast(Consumer.via_tuple(consumer), {transactional_type, message, state[:name]})
+		 end)
+		Process.send_after(self, {:timeout, message, transactional_type}, @default_timeout)
+		new_messages = state[:pending_confirm_messages] ++ [{message, pending_consumers}]
+		state = Keyword.put(state, :pending_confirm_messages, new_messages)
+		update_agent_state(state)
+		{:noreply, state}
+	end
+
 	"mensajes autoenviados"
-	def handle_info({:timeout, message}, state) do
+	def handle_info({:timeout, message, transactional_type}, state) do
 		{id, _ ,_ } = message
 		pending_confirm_messages = state[:pending_confirm_messages]
-	  sent_message = findMessage(pending_confirm_messages, message)
-		if(sent_message == nil) do
+	  pending_message = findMessage(pending_confirm_messages, message)
+		if(pending_message == nil) do
 			Logger.info("Consumers has procees #{id}, aborting timeout")
 			{:noreply, state}
 		else
 			Logger.info("The message is not completely consumed and the time expired")
-			new_messages = List.delete(pending_confirm_messages, sent_message)
+			{_, consumers_to_notify} = pending_message
+			new_messages = List.delete(pending_confirm_messages, pending_message)
 			state = Keyword.put(state, :pending_confirm_messages, new_messages)
 			update_agent_state(state)
-			{:noreply, state}
+			handle_cast({:process_message_laggard, message, transactional_type, consumers_to_notify}, state)
 		end
   end
 
@@ -107,6 +122,19 @@ defmodule QueueManager.BroadCastQueue do
 		else
 			state = Keyword.put(state, :consumers, consumers ++ [consumer])
 			update_agent_state(state)
+			{:reply, :ok, state}
+		end
+	end
+
+	def handle_call({:delete_consumer, consumer}, _from, state) do
+		Logger.info("Deleting consumer #{consumer}")
+		consumers = state[:consumers]
+		if(Enum.member?(consumers, consumer)) do
+			new_consumers = List.delete(consumers, consumer)
+			state = Keyword.put(state, :consumers, new_consumers)
+			update_agent_state(state)
+			{:reply, :ok, state}
+		else
 			{:reply, :ok, state}
 		end
 	end
