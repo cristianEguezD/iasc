@@ -23,7 +23,7 @@ defmodule QueueManager.NormalQueue.Starter do
 
 		queue_name = child_spec[:id]
 		agent_name = QueueManager.QueueAgent.get_agent_name(queue_name)
-		agent_opts = [name: agent_name, initial_state: [consumers: [], pending_confirm_messages: [], name: queue_name]]
+		agent_opts = [name: agent_name, initial_state: QueueManager.NormalQueue.get_initial_state(queue_name)]
 
 		agent_spec = calculate_child_spec(agent_opts, QueueManager.QueueAgent)
 
