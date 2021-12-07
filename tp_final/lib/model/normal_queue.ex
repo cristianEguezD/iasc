@@ -2,13 +2,13 @@ defmodule QueueManager.NormalQueue do
 	use GenServer
 	require Logger
 
-	@default_timeout 60000
+	@default_timeout 30000
 	@default_no_consumers 5000
 
 	def start_link(opts) do
 		name = opts[:name]
 		Logger.info("Starting queue with name: #{name}")
-		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: [], name: name], name: via_tuple(name))
+		GenServer.start_link(__MODULE__, [consumers: [], pending_confirm_messages: [], busy_consumers: [], name: name], name: via_tuple(name))
 	end
 
 	def init(init_arg) do
@@ -35,12 +35,17 @@ defmodule QueueManager.NormalQueue do
 		handle_cast({:process_message, message}, state)
 	end
 
-	def handle_cast({:processed_message, message, _ }, state) do
+	def handle_cast({:processed_message, message, consumer_name }, state) do
 		{id, _, _} = message
 		Logger.info("Message #{id} processed succefully for consumer, cleaning pending messages")
 		pending_confirm_messages = state[:pending_confirm_messages]
 		new_messages = List.delete(pending_confirm_messages, message)
+		new_busy_consumers = List.delete(state[:busy_consumers], consumer_name)
+		consumers = state[:consumers]
+		new_consumers = consumers ++ [consumer_name]
 		state = Keyword.put(state, :pending_confirm_messages, new_messages)
+		state = Keyword.put(state, :busy_consumers, new_busy_consumers)
+		state = Keyword.put(state, :consumers, new_consumers)
 		update_agent_state(state)
 		{:noreply, state}
 	end
@@ -66,13 +71,16 @@ defmodule QueueManager.NormalQueue do
 			{:noreply, state}
 		else
 			[first_consumer | others_consumers] = consumers
+			busy_consumers = state[:busy_consumers]
 			Logger.info("Sending message #{id} to #{first_consumer}")
 			pending_confirm_messages = state[:pending_confirm_messages]
 			GenServer.cast(Consumer.via_tuple(first_consumer), {:process_message_transactional, message, state[:name]})
 			Process.send_after(self, {:timeout, message}, @default_timeout)
-			consumers = others_consumers ++ [first_consumer]
+			consumers = others_consumers
+			busy_consumers = busy_consumers ++ [first_consumer]
 			pending_confirm_messages = pending_confirm_messages ++ [message]
 			state = Keyword.put(state, :consumers, consumers)
+			state = Keyword.put(state, :busy_consumers, busy_consumers)
 			state = Keyword.put(state, :pending_confirm_messages, pending_confirm_messages)
 			update_agent_state(state)
 			{:noreply, state}
