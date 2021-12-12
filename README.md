@@ -13,3 +13,9 @@ En cuanto a la arquitectura contamos con:
 -   QueueAgent: gestiona el estado tanto de las NormalQueue como también de las BroadcastQueue. Existe una por cada queue, esto permite que el estado quede distribuído en todo el sistema y no haya un único punto de falla.
 -   Producer: no se encuentra bajo la supervisión de Horde, simplemente son funcionalidades que nos permiten crear distintos tipos de mensajes para que las queues puedan recibirlos.
 -   Starter: no se encuentra bajo la supervisión de Horde, nos permite crear las distintas colas y consumidores que necesita el sistema.
+
+# Autores
+- Cristian Egüez
+- Gerónimo Corti
+- Gonzalo Maidán
+- Lucas Centurión
