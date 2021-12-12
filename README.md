@@ -1,4 +1,4 @@
-# Arquitectura
+# Arquitectura del sistema
 
 ![Arquitectura](arquitectura.jpg?raw=true "Arquitectura")
 
