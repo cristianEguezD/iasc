@@ -1,6 +1,18 @@
-# QueueManager
+# Arquitectura
 
-**TODO: Add description**
+![Arquitectura](arquitectura.jpg?raw=true "Arquitectura")
+
+Como primero punto, decidimos utilizar elixir y en particular el modelo de actores debido a que el enunciado del trabajo práctico tenía como objetivos principales lograr que el sistema sea distribuído, tolerar las fallas en el sistema, atender las solicitudes de forma concurrente y otros aspectos que el lenguaje soportaba de forma nativa.
+Escogimos utilizar Horde ya que nos provee una gestión transparente de la distribución del sistema.
+En cuanto a la arquitectura contamos con:
+-   NodeSupervisorObserver: encargado de supervisar al NodeObserver del sistema.
+-   NodeObserver: responsable de setear los miembros del sistema cuando un nodo entra o un nodo se cae.
+-   NormalQueue: cola que funciona con el esquema tradicional de envío de mensajes.
+-   BroadcastQueue: cola especial que funciona con la modalidad Publicar-Suscribir.
+-   Consumer: entidad responsable de recibir y procesar pedidos de las queues.
+-   QueueAgent: gestiona el estado tanto de las NormalQueue como también de las BroadcastQueue. Existe una por cada queue, esto permite que el estado quede distribuído en todo el sistema y no haya un único punto de falla.
+-   Producer: no se encuentra bajo la supervisión de Horde, simplemente son funcionalidades que nos permiten crear distintos tipos de mensajes para que las queues puedan recibirlos.
+-   Starter: no se encuentra bajo la supervisión de Horde, nos permite crear las distintas colas y consumidores que necesita el sistema.  
 
 ## Installation
 
@@ -22,7 +34,7 @@ be found at [https://hexdocs.pm/tp_final](https://hexdocs.pm/tp_final).
 
 ## Start a node
 
-```bash
+```
 iex --sname node1 --cookie some_cookie -S mix
 ```
 
@@ -57,9 +69,7 @@ Consumer.start_in_cluster([name: :consumer1])
 GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :queue_name})
 ```
 
-
-
-## Full example
+## Full example (without Producer)
 ```
 opts = [name: :normal_queue]
 QueueManager.NormalQueue.Starter.start_normal_queue(opts)
@@ -89,39 +99,9 @@ GenServer.cast(QueueManager.BroadCastQueue.via_tuple(:broadcast_queue), {:proces
 
 ```
 
-## Example with producer
+## Full example with producer
 
 ```
-opts = [name: :normal_queue]
-QueueManager.NormalQueue.Starter.start_normal_queue(opts)
-Consumer.start_in_cluster([name: :consumer1])
-
-GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
-
-normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
-Producer.produce_hash_message(:normal_queue, :id1, normal_queue_message)
-Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
-Producer.produce_n_wait_messages(:normal_queue, :process_1, normal_queue_message, 3, 10000, 0, :process_message_transactional)
-
-
-opts = [name: :broadcast_queue]
-QueueManager.NormalQueue.Starter.start_broadcast_queue(opts)
-Consumer.start_in_cluster([name: :consumer1])
-
-GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :broadcast_queue})
-
-broadcast_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
-Producer.produce_hash_message(:broadcast_queue, :id1, broadcast_queue_message)
-Producer.produce_wait_message(:broadcast_queue, :id2, broadcast_queue_message, 3000)
-Producer.produce_n_wait_messages(:broadcast_queue, :process_1, broadcast_queue_message, 1, 40000, 0, :process_message_transactional)
-
-GenServer.call(Consumer.via_tuple(:broadcast_queue), {:delete_consumer, :consumer1})
-
-```
-
-
-## Caso Básico
-
 opts = [name: :normal_queue]
 QueueManager.NormalQueue.Starter.start_normal_queue(opts)
 Consumer.start_in_cluster([name: :consumer1])
@@ -150,3 +130,5 @@ Producer.produce_n_wait_messages(:broadcast_queue, :process_4, broadcast_queue_m
 
 GenServer.call(Consumer.via_tuple(:normal_queue), {:delete_consumer, :consumer1})
 GenServer.call(Consumer.via_tuple(:broadcast_queue), {:delete_consumer, :consumer1})
+
+```
