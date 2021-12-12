@@ -104,9 +104,6 @@ Producer.produce_wait_message(:normal_queue, :id2, normal_queue_message, 3000)
 Producer.produce_n_wait_messages(:normal_queue, :process_1, normal_queue_message, 3, 10000, 0, :process_message_transactional)
 
 
-
-
-
 opts = [name: :broadcast_queue]
 QueueManager.NormalQueue.Starter.start_broadcast_queue(opts)
 Consumer.start_in_cluster([name: :consumer1])
@@ -121,3 +118,35 @@ Producer.produce_n_wait_messages(:broadcast_queue, :process_1, broadcast_queue_m
 GenServer.call(Consumer.via_tuple(:broadcast_queue), {:delete_consumer, :consumer1})
 
 ```
+
+
+## Caso Básico
+
+opts = [name: :normal_queue]
+QueueManager.NormalQueue.Starter.start_normal_queue(opts)
+Consumer.start_in_cluster([name: :consumer1])
+Consumer.start_in_cluster([name: :consumer2])
+Consumer.start_in_cluster([name: :consumer3])
+GenServer.call(Consumer.via_tuple(:consumer1), {:register_in_queue, :normal_queue})
+GenServer.call(Consumer.via_tuple(:consumer2), {:register_in_queue, :normal_queue})
+GenServer.call(Consumer.via_tuple(:consumer3), {:register_in_queue, :normal_queue})
+normal_queue_message = ~s({"message": "Esto es un mensaje para la normal queue"})
+Producer.produce_n_wait_messages(:normal_queue, :process_1, normal_queue_message, 1, 5000, 0, :process_message_transactional)
+Producer.produce_n_wait_messages(:normal_queue, :process_2, normal_queue_message, 1, 10000, 0, :process_message_no_transactional)
+
+
+opts = [name: :broadcast_queue]
+QueueManager.NormalQueue.Starter.start_broadcast_queue(opts)
+Consumer.start_in_cluster([name: :consumer4])
+Consumer.start_in_cluster([name: :consumer5])
+Consumer.start_in_cluster([name: :consumer6])
+GenServer.call(Consumer.via_tuple(:consumer4), {:register_in_queue, :broadcast_queue})
+GenServer.call(Consumer.via_tuple(:consumer5), {:register_in_queue, :broadcast_queue})
+GenServer.call(Consumer.via_tuple(:consumer6), {:register_in_queue, :broadcast_queue})
+broadcast_queue_message = ~s({"message": "Esto es otro mensaje pero para la queue broadcast"})
+Producer.produce_n_wait_messages(:broadcast_queue, :process_3, broadcast_queue_message, 1, 1000, 0, :process_message_transactional)
+Producer.produce_n_wait_messages(:broadcast_queue, :process_4, broadcast_queue_message, 1, 1000, 0, :process_message_no_transactional)
+
+
+GenServer.call(Consumer.via_tuple(:normal_queue), {:delete_consumer, :consumer1})
+GenServer.call(Consumer.via_tuple(:broadcast_queue), {:delete_consumer, :consumer1})
